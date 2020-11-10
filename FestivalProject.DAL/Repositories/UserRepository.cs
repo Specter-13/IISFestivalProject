@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FestivalProject.DAL.Entities;
 using FestivalProject.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FestivalProject.DAL.Repositories
 {
@@ -22,7 +23,9 @@ namespace FestivalProject.DAL.Repositories
 
         public UserEntity GetById(Guid id)
         {
-            return _dbContext.Users.First(x => x.Id == id);
+            return _dbContext.Users.Include(x => x.ReservationList)
+                .ThenInclude(x => x.Festival)
+                .First(x => x.Id == id);
         }
 
         public UserEntity Create(UserEntity item)

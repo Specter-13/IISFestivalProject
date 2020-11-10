@@ -8,47 +8,51 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FestivalProject.DAL.Repositories
 {
-    public class ReservationRepository : IGenericCrudOperations<ReservationEntity>
+    public class LoginRepository: IGenericCrudOperations<LoginEntity>
     {
         private readonly FestivalDbContext _dbContext;
 
-        public ReservationRepository(FestivalDbContext dbContext)
+        public LoginRepository(FestivalDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public IList<ReservationEntity> GetAll()
+        public IList<LoginEntity> GetAll()
         {
-            return _dbContext.Reservations
-                .Include(x => x.Festival)
+            return _dbContext.Logins
                 .Include(x => x.User)
                 .ToList();
         }
 
-        public ReservationEntity GetById(Guid id)
+        public LoginEntity GetById(Guid id)
         {
-            return _dbContext.Reservations
-                .Include(x => x.Festival)
+            return _dbContext.Logins
                 .Include(x => x.User)
                 .First(x => x.Id == id);
         }
-
-        public ReservationEntity Create(ReservationEntity item)
+        public LoginEntity GetByUsername(string name)
         {
-            _dbContext.Reservations.Add(item);
+            return _dbContext.Logins
+                .Include(x => x.User)
+                .First(x => x.Username == name);
+        }
+
+        public LoginEntity Create(LoginEntity item)
+        {
+            _dbContext.Logins.Add(item);
             _dbContext.SaveChanges();
             return item;
         }
 
-        public ReservationEntity Update(ReservationEntity item)
+        public LoginEntity Update(LoginEntity item)
         {
-            _dbContext.Reservations.Update(item);
+            _dbContext.Logins.Update(item);
             _dbContext.SaveChanges();
             return item;
         }
 
         public void Delete(Guid id)
         {
-            var entity = _dbContext.Reservations.First(t => t.Id == id);
+            var entity = _dbContext.Logins.First(t => t.Id == id);
             _dbContext.Remove(entity);
             _dbContext.SaveChanges();
         }

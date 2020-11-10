@@ -152,6 +152,7 @@ namespace FestivalProject.DAL.Seed
         {
             modelBuilder.Entity<UserEntity>(entity =>
             {
+                entity.HasMany(x => x.ReservationList);
                 entity.HasData(new
                 {
                     Data.Admin.Id,

@@ -56,14 +56,18 @@ namespace FestivalProject.DAL.Seed
 
         public static void SeedMainStage(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<StageEntity>()
-                .HasData(new
+            modelBuilder.Entity<StageEntity>(entity =>
+            {
+                entity.HasMany(x => x.StageInterpret);
+                entity.HasOne(x=>x.Festival);
+                entity.HasData(new
                 {
                     Data.MainStage.Id,
                     Data.MainStage.Capacity,
                     Data.MainStage.Name,
                     Data.MainStage.FestivalId
                 });
+            });
         }
 
         
@@ -186,6 +190,8 @@ namespace FestivalProject.DAL.Seed
         {
             modelBuilder.Entity<ReservationEntity>(entity =>
             {
+                entity.HasOne(x => x.User);
+                entity.HasOne(x => x.Festival);
                 entity.HasData(new
                 {
                     Data.Viewer1Reservation.Id,
@@ -206,6 +212,7 @@ namespace FestivalProject.DAL.Seed
             modelBuilder.Entity<LoginEntity>(entity =>
             {
                 entity.HasIndex(i => i.Username).IsUnique();
+                entity.HasOne(x => x.User);
                 entity.HasData(new
                 {
                     Data.AdminLogin.Id,

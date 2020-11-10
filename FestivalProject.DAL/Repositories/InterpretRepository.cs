@@ -52,6 +52,17 @@ namespace FestivalProject.DAL.Repositories
 
         public void Delete(Guid id)
         {
+            //remove members
+            _dbContext.Members
+                .RemoveRange(_dbContext.Members.Where((x => x.InterpretId == id)));
+
+            //remove festivalInterpret
+            _dbContext.FestivalInterprets
+                .RemoveRange(_dbContext.FestivalInterprets.Where((x => x.InterpretId == id)));
+            //remove stageInterpret
+            _dbContext.StageInterprets
+                .RemoveRange(_dbContext.StageInterprets.Where((x => x.InterpretId == id)));
+            //remove interpret
             var entity = _dbContext.Interprets.First(t => t.Id == id);
             _dbContext.Remove(entity);
             _dbContext.SaveChanges();

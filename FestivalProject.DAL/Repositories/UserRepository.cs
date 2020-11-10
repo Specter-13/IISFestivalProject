@@ -44,6 +44,14 @@ namespace FestivalProject.DAL.Repositories
 
         public void Delete(Guid id)
         {
+            //remove all depended reservations
+            _dbContext.Reservations
+                .RemoveRange(_dbContext.Reservations.Where((x => x.UserId == id)));
+            //remove login only when user is registered
+            var login = _dbContext.Logins.FirstOrDefault(x => x.UserId == id);
+            if (login != null) _dbContext.Logins.Remove(login);
+
+            //remove user
             var entity = _dbContext.Users.First(t => t.Id == id);
             _dbContext.Remove(entity);
             _dbContext.SaveChanges();

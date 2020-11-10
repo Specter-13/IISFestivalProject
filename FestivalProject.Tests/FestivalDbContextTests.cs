@@ -205,6 +205,146 @@ namespace FestivalProject.Tests
 
         }
 
+        //padne ked sa prida viacej dat do db
+        [Fact]
+        public void Festival_Delete()
+        {
+
+            var festival = new FestivalEntity()
+            {
+                Id = Guid.Parse("46abef51-c53f-4cc5-a270-a2756ef1455e"),
+                Capacity = 1500,
+                Name = "Grape",
+                City = "Piestany",
+                Street = "Letiskova 123",
+                Country = "Slovakia",
+                Description = "One of the best festivals in Slovakia!",
+                StartTime = new DateTime(2020, 7, 25),
+                EndTime = new DateTime(2020, 7, 23),
+                Genre = MusicGenre.Rock,
+                Price = 55,
+            };
+            //var festivalss = _testContext.Festivals.ToList();
+            //remove FestivalInterprets, where FestivalId == id
+            _testContext.FestivalInterprets
+                .RemoveRange(_testContext.FestivalInterprets.Where((x=>x.FestivalId == festival.Id)));
+            
+            //get all depended stages
+            var stages = _testContext.Stages.Where(x=> x.FestivalId == festival.Id);
+
+            //remove stageInterpret
+            foreach (var stage in stages)
+            {
+                _testContext.StageInterprets
+                    .RemoveRange(_testContext.StageInterprets.Where(x => x.StageId == stage.Id));
+            }
+
+            //remove stages
+            _testContext.Stages.RemoveRange(stages);
+
+            //remove festival
+            _testContext.Festivals.Remove(festival);
+            _testContext.SaveChanges();
+
+            var festivalInterpret = _testContext.FestivalInterprets.Where(x=> x.FestivalId == festival.Id);
+            var stageInterpret = _testContext.StageInterprets.ToList();
+            var allstages = _testContext.Stages.ToList();
+            var festivals = _testContext.Festivals.ToList();
+            
+            
+            
+            Assert.Empty(festivalInterpret);
+            Assert.Empty(_testContext.StageInterprets);
+            Assert.Empty(_testContext.Festivals);
+            Assert.Empty(_testContext.Stages);
+
+        }
+
+        [Fact]
+        public void Interpret_Delete()
+        {
+
+            var id = Guid.Parse("c993e8d3-719b-43d7-908b-e26dc6f4ace0");
+
+
+            //remove members
+            _testContext.Members
+                .RemoveRange(_testContext.Members.Where((x => x.InterpretId == id)));
+
+            //remove festivalInterpret
+            _testContext.FestivalInterprets
+                .RemoveRange(_testContext.FestivalInterprets.Where((x => x.InterpretId == id)));
+            //remove stageInterpret
+            _testContext.StageInterprets
+                .RemoveRange(_testContext.StageInterprets.Where((x => x.InterpretId == id)));
+            //remove interpret
+            var entity = _testContext.Interprets.First(t => t.Id == id);
+            _testContext.Remove(entity);
+            _testContext.SaveChanges();
+
+            var festivalInterpret = _testContext.FestivalInterprets.Where(x=> x.InterpretId == id).ToList();
+            var stageinterprets = _testContext.StageInterprets.Where(x => x.InterpretId == id).ToList();
+            var interpretsCount = _testContext.Interprets.ToList().Count;
+
+            Assert.Equal(1, interpretsCount);
+            Assert.Empty(festivalInterpret);
+            Assert.Empty(stageinterprets);
+
+        }
+
+
+        [Fact]
+        public void Stage_Delete()
+        {
+
+            var id = Guid.Parse("cb22c323-729d-49e6-834a-644d47d3dc4c");
+
+
+            //remove stageInterpret
+            _testContext.StageInterprets
+                .RemoveRange(_testContext.StageInterprets.Where((x => x.StageId == id)));
+            //remove stage
+            var entity = _testContext.Stages.First(t => t.Id == id);
+            _testContext.Remove(entity);
+            _testContext.SaveChanges();
+
+            var stageinterprets = _testContext.StageInterprets.Where(x => x.StageId == id).ToList();
+            var stages = _testContext.Stages.FirstOrDefault(x=> x.Id == id);
+
+            Assert.Null(stages);
+            Assert.Empty(stageinterprets);
+
+        }
+
+        [Fact]
+        public void User_Delete()
+        {
+
+            var id = Guid.Parse("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1");
+
+
+            //remove all depended reservations
+            _testContext.Reservations
+                .RemoveRange(_testContext.Reservations.Where((x => x.UserId == id)));
+            //remove login only when user is registered
+            var login = _testContext.Logins.FirstOrDefault(x => x.UserId == id);
+            if (login != null) _testContext.Logins.Remove(login);
+                
+            //remove user
+            var entity = _testContext.Users.First(t => t.Id == id);
+            _testContext.Remove(entity);
+            _testContext.SaveChanges();
+
+            var reservations = _testContext.Reservations.Where(x => x.UserId == id).ToList();
+            var notExistingEntity = _testContext.Users.FirstOrDefault(x => x.Id == id);
+            var nonExistingLogin = _testContext.Logins.FirstOrDefault(x => x.UserId == id);
+
+            Assert.Null(notExistingEntity);
+            Assert.Null(nonExistingLogin);
+            Assert.Empty(reservations);
+
+        }
+
         public void Dispose() => _testContext.Dispose();
       
     }

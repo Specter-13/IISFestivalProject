@@ -48,9 +48,30 @@ namespace FestivalProject.DAL.Repositories
 
         public void Delete(Guid id)
         {
+
+            //remove FestivalInterprets, where FestivalId == id
+            _dbContext.FestivalInterprets
+                .RemoveRange(_dbContext.FestivalInterprets.Where((x => x.FestivalId == id)));
+
+            //get all depended stages
+            var stages = _dbContext.Stages.Where(x => x.FestivalId == id);
+
+            //remove stageInterpret
+            foreach (var stage in stages)
+            {
+                _dbContext.StageInterprets
+                    .RemoveRange(_dbContext.StageInterprets.Where(x => x.StageId == stage.Id));
+            }
+
+            //remove stages
+            _dbContext.Stages.RemoveRange(stages);
+
+            //remove festival
             var entity = _dbContext.Festivals.First(t => t.Id == id);
             _dbContext.Remove(entity);
+
             _dbContext.SaveChanges();
+
         }
     }
 }

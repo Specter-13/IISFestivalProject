@@ -72,6 +72,14 @@ namespace FestivalProject.DAL.Seed
 
         };
 
+        public static readonly FestivalInterpretEntity FestivalInterpretGrapeMetallica = new FestivalInterpretEntity
+        {
+            Id = Guid.Parse("90a9ab90-4e0f-41f2-be37-3f170514f2f3"),
+            FestivalId = Guid.Parse("46abef51-c53f-4cc5-a270-a2756ef1455e"),
+            InterpretId = Guid.Parse("c993e8d3-719b-43d7-908b-e26dc6f4ace0")
+
+        };
+
         public static readonly StageInterpretEntity StageInterpretDuricaMainStage = new StageInterpretEntity
         {
             Id = Guid.Parse("579ed9de-3b43-494e-98e2-102bf7609447"),

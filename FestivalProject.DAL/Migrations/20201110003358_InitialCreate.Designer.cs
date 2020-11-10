@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FestivalProject.DAL.Migrations
 {
     [DbContext(typeof(FestivalDbContext))]
-    [Migration("20201109215045_InitialCreate")]
+    [Migration("20201110003358_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,6 +101,12 @@ namespace FestivalProject.DAL.Migrations
                             InterpretId = new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"),
                             FestivalId = new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"),
                             Id = new Guid("5da19889-e894-40ad-8033-85d634027e3a")
+                        },
+                        new
+                        {
+                            InterpretId = new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"),
+                            FestivalId = new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"),
+                            Id = new Guid("90a9ab90-4e0f-41f2-be37-3f170514f2f3")
                         });
                 });
 
@@ -291,9 +297,6 @@ namespace FestivalProject.DAL.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("FestivalEntityId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("FestivalId")
                         .HasColumnType("uniqueidentifier");
 
@@ -302,7 +305,7 @@ namespace FestivalProject.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FestivalEntityId");
+                    b.HasIndex("FestivalId");
 
                     b.ToTable("Stages");
 
@@ -469,9 +472,11 @@ namespace FestivalProject.DAL.Migrations
 
             modelBuilder.Entity("FestivalProject.DAL.Entities.StageEntity", b =>
                 {
-                    b.HasOne("FestivalProject.DAL.Entities.FestivalEntity", null)
+                    b.HasOne("FestivalProject.DAL.Entities.FestivalEntity", "Festival")
                         .WithMany("StageList")
-                        .HasForeignKey("FestivalEntityId");
+                        .HasForeignKey("FestivalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FestivalProject.DAL.Entities.StageInterpretEntity", b =>

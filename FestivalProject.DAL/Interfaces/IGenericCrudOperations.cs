@@ -5,10 +5,12 @@ using FestivalProject.DAL.Entities;
 
 namespace FestivalProject.DAL.Interfaces
 {
-    public interface IFestivalInterpretRepository
+    public interface IGenericCrudOperations<T> where T : EntityBase
     {
-       
-        FestivalInterpretEntity Create(FestivalInterpretEntity festivalInterpret);
+        IList<T> GetAll();
+        T GetById(Guid id);
+        T Create(T item);
+        T Update(T item);
         void Delete(Guid id);
     }
 }

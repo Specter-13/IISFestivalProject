@@ -71,18 +71,17 @@ namespace FestivalProject.DAL.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Capacity = table.Column<int>(nullable: false),
-                    FestivalId = table.Column<Guid>(nullable: false),
-                    FestivalEntityId = table.Column<Guid>(nullable: true)
+                    FestivalId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Stages_Festivals_FestivalEntityId",
-                        column: x => x.FestivalEntityId,
+                        name: "FK_Stages_Festivals_FestivalId",
+                        column: x => x.FestivalId,
                         principalTable: "Festivals",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -232,11 +231,6 @@ namespace FestivalProject.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Stages",
-                columns: new[] { "Id", "Capacity", "FestivalEntityId", "FestivalId", "Name" },
-                values: new object[] { new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), 600, null, new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), "Main Stage" });
-
-            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "City", "Country", "Email", "LoginId", "Name", "Psc", "Role", "Street", "Surname" },
                 values: new object[,]
@@ -248,7 +242,11 @@ namespace FestivalProject.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "FestivalInterprets",
                 columns: new[] { "InterpretId", "FestivalId", "Id" },
-                values: new object[] { new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"), new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), new Guid("5da19889-e894-40ad-8033-85d634027e3a") });
+                values: new object[,]
+                {
+                    { new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"), new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), new Guid("5da19889-e894-40ad-8033-85d634027e3a") },
+                    { new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"), new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), new Guid("90a9ab90-4e0f-41f2-be37-3f170514f2f3") }
+                });
 
             migrationBuilder.InsertData(
                 table: "Logins",
@@ -265,13 +263,19 @@ namespace FestivalProject.DAL.Migrations
                 values: new object[] { new Guid("8edf6ecd-8d1d-4fbf-92c1-9640e4bc21d9"), "rezervacia sa vybavuje", new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), "Grape rezervacia (mozno bude lepsie nejake cislo rezervacie)", 55m, 0, 1, new Guid("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1") });
 
             migrationBuilder.InsertData(
+                table: "Stages",
+                columns: new[] { "Id", "Capacity", "FestivalId", "Name" },
+                values: new object[] { new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), 600, new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), "Main Stage" });
+
+            migrationBuilder.InsertData(
                 table: "StageInterprets",
                 columns: new[] { "InterpretId", "StageId", "ConcertLength", "ConcertStart", "Id" },
-                values: new object[,]
-                {
-                    { new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"), new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), new TimeSpan(0, 2, 30, 0, 0), new DateTime(2020, 7, 25, 15, 0, 0, 0, DateTimeKind.Unspecified), new Guid("579ed9de-3b43-494e-98e2-102bf7609447") },
-                    { new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"), new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), new TimeSpan(0, 3, 30, 0, 0), new DateTime(2020, 7, 26, 10, 0, 0, 0, DateTimeKind.Unspecified), new Guid("9c8bc32e-3239-45a2-a549-bba824deb663") }
-                });
+                values: new object[] { new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"), new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), new TimeSpan(0, 2, 30, 0, 0), new DateTime(2020, 7, 25, 15, 0, 0, 0, DateTimeKind.Unspecified), new Guid("579ed9de-3b43-494e-98e2-102bf7609447") });
+
+            migrationBuilder.InsertData(
+                table: "StageInterprets",
+                columns: new[] { "InterpretId", "StageId", "ConcertLength", "ConcertStart", "Id" },
+                values: new object[] { new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"), new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), new TimeSpan(0, 3, 30, 0, 0), new DateTime(2020, 7, 26, 10, 0, 0, 0, DateTimeKind.Unspecified), new Guid("9c8bc32e-3239-45a2-a549-bba824deb663") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FestivalInterprets_FestivalId",
@@ -311,9 +315,9 @@ namespace FestivalProject.DAL.Migrations
                 column: "StageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stages_FestivalEntityId",
+                name: "IX_Stages_FestivalId",
                 table: "Stages",
-                column: "FestivalEntityId");
+                column: "FestivalId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

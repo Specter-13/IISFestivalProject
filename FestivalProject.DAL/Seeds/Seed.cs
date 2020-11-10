@@ -72,6 +72,7 @@ namespace FestivalProject.DAL.Seed
         {
             modelBuilder.Entity<FestivalEntity>(entity =>
             {
+                entity.HasMany(x => x.StageList).WithOne(x => x.Festival);
                 entity.HasData(new
                 {
                     Data.FestivalGrape.Id,
@@ -105,6 +106,12 @@ namespace FestivalProject.DAL.Seed
                     Data.FestivalInterpretGrapeDurica.Id,
                     Data.FestivalInterpretGrapeDurica.InterpretId,
                     Data.FestivalInterpretGrapeDurica.FestivalId
+                });
+                entity.HasData(new
+                {
+                    Data.FestivalInterpretGrapeMetallica.Id,
+                    Data.FestivalInterpretGrapeMetallica.InterpretId,
+                    Data.FestivalInterpretGrapeMetallica.FestivalId
                 });
             });
         }

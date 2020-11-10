@@ -17,6 +17,14 @@
     <Compile Remove="Migrations\20201109211321_InitialCreate.Designer.cs" />
     <Compile Remove="Migrations\20201109214848_AddMoreData.cs" />
     <Compile Remove="Migrations\20201109214848_AddMoreData.Designer.cs" />
+    <Compile Remove="Migrations\20201109215045_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201109215045_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201109234240_MoreTestData.cs" />
+    <Compile Remove="Migrations\20201109234240_MoreTestData.Designer.cs" />
+    <Compile Remove="Migrations\20201110002418_MoreTestData2.cs" />
+    <Compile Remove="Migrations\20201110002418_MoreTestData2.Designer.cs" />
+    <Compile Remove="Migrations\20201110002843_MoreTestData3.cs" />
+    <Compile Remove="Migrations\20201110002843_MoreTestData3.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,10 +40,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>

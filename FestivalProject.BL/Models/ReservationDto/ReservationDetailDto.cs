@@ -13,11 +13,10 @@ namespace FestivalProject.BL.Models.ReservationDto
         public ReservationStatus State { get; set; }
         public string Name { get; set; }
         public int Tickets { get; set; }
-        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         public string Description { get; set; }
 
-        public UserDetailDto User { get; set; }
-        public FestivalInterpretForInterpretDto Festival { get; set; }
+        public UserListDto User { get; set; }
+        public FestivalListDto Festival { get; set; }
     }
 }

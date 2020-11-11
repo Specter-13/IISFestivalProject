@@ -8,6 +8,6 @@ namespace FestivalProject.BL.Models.UserDto
         public UserRoles Role { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Username { get; set; } // mapper fix
+        public string Username { get; set; } 
     }
 }

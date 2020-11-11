@@ -110,14 +110,12 @@ namespace FestivalProject.Tests
                 Street = "Vajnorska",
                 Psc = "03855",
                 Email = "trdielko@hotmail.sk",
-                LoginId = Guid.Parse("f7e5a131-c097-47fc-8900-65c51819ecee")
             };
 
 
             var returnedUser = _testContext.Users
                 .Include(x => x.ReservationList)
                 .ThenInclude(x => x.Festival)
-                .Include(x=> x.Login)
                 .First(x => x.Id == festival.Id);
 
             Assert.Equal(festival.Id, returnedUser.Id);
@@ -165,37 +163,7 @@ namespace FestivalProject.Tests
         }
 
 
-        [Fact]
-        public void Login_GetAll()
-        {
-            int logins = 2;
-
-
-            var returnedLoginsList = _testContext.Logins
-                .ToList();
-
-            Assert.Equal(logins, returnedLoginsList.Count);
-
-        }
-
-        [Fact]
-        public void Login_GetByUsername()
-        {
-            var login = new LoginEntity()
-            {
-                Id = Guid.Parse("f7e5a131-c097-47fc-8900-65c51819ecee"),
-                Username = "trdielko",
-                Password = "12345",
-                UserId = Guid.Parse("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1"),
-            };
-
-
-            var returnedLogin = _testContext.Logins
-                .First(x => x.Username == login.Username);
-
-            Assert.Equal(returnedLogin.Id, login.Id);
-
-        }
+       
 
         //padne ked sa prida viacej dat do db
         [Fact]
@@ -318,9 +286,7 @@ namespace FestivalProject.Tests
             //remove all depended reservations
             _testContext.Reservations
                 .RemoveRange(_testContext.Reservations.Where((x => x.UserId == id)));
-            //remove login only when user is registered
-            var login = _testContext.Logins.FirstOrDefault(x => x.UserId == id);
-            if (login != null) _testContext.Logins.Remove(login);
+         
                 
             //remove user
             var entity = _testContext.Users.First(t => t.Id == id);
@@ -329,10 +295,8 @@ namespace FestivalProject.Tests
 
             var reservations = _testContext.Reservations.Where(x => x.UserId == id).ToList();
             var notExistingEntity = _testContext.Users.FirstOrDefault(x => x.Id == id);
-            var nonExistingLogin = _testContext.Logins.FirstOrDefault(x => x.UserId == id);
 
             Assert.Null(notExistingEntity);
-            Assert.Null(nonExistingLogin);
             Assert.Empty(reservations);
 
         }

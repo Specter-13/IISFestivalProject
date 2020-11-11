@@ -153,46 +153,6 @@ namespace FestivalProject.DAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FestivalProject.DAL.Entities.LoginEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Username")
-                        .IsUnique()
-                        .HasFilter("[Username] IS NOT NULL");
-
-                    b.ToTable("Logins");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a2347ca2-4a12-46f6-9013-3596b07c63ed"),
-                            Password = "123",
-                            UserId = new Guid("1ae18ad6-9809-4b19-be41-94aa4ff622f8"),
-                            Username = "admin"
-                        },
-                        new
-                        {
-                            Id = new Guid("f7e5a131-c097-47fc-8900-65c51819ecee"),
-                            Password = "12345",
-                            UserId = new Guid("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1"),
-                            Username = "trdielko"
-                        });
-                });
-
             modelBuilder.Entity("FestivalProject.DAL.Entities.MemberEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -370,10 +330,10 @@ namespace FestivalProject.DAL.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("LoginId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Psc")
@@ -388,9 +348,10 @@ namespace FestivalProject.DAL.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("LoginId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
 
@@ -400,10 +361,11 @@ namespace FestivalProject.DAL.Migrations
                             Id = new Guid("1ae18ad6-9809-4b19-be41-94aa4ff622f8"),
                             Country = "Slovakia",
                             Email = "xspavo00@vutrb.cz",
-                            LoginId = new Guid("a2347ca2-4a12-46f6-9013-3596b07c63ed"),
                             Name = "David",
+                            Password = "123",
                             Role = 0,
-                            Surname = "Spavor"
+                            Surname = "Spavor",
+                            Username = "admin"
                         },
                         new
                         {
@@ -411,12 +373,13 @@ namespace FestivalProject.DAL.Migrations
                             City = "Bratislava",
                             Country = "Slovakia",
                             Email = "trdielko@hotmail.sk",
-                            LoginId = new Guid("f7e5a131-c097-47fc-8900-65c51819ecee"),
                             Name = "Barbora",
+                            Password = "12345",
                             Psc = "03855",
                             Role = 3,
                             Street = "Vajnorska",
-                            Surname = "Bakosova"
+                            Surname = "Bakosova",
+                            Username = "trdielko"
                         });
                 });
 
@@ -479,15 +442,6 @@ namespace FestivalProject.DAL.Migrations
                     b.HasOne("FestivalProject.DAL.Entities.StageEntity", "Stage")
                         .WithMany("StageInterpret")
                         .HasForeignKey("StageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FestivalProject.DAL.Entities.UserEntity", b =>
-                {
-                    b.HasOne("FestivalProject.DAL.Entities.LoginEntity", "Login")
-                        .WithMany()
-                        .HasForeignKey("LoginId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

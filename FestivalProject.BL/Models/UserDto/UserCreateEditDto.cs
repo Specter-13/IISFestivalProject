@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using FestivalProject.BL.Models.ReservationDto;
 using FestivalProject.DAL.Entities;
 using FestivalProject.DAL.Enums;
 
 namespace FestivalProject.BL.Models.UserDto
 {
-    public class UserDetailDto : EntityBase
+    public class UserCreateEditDto : EntityBase
     {
         public UserRoles Role { get; set; }
         public string Name { get; set; }
@@ -16,8 +17,7 @@ namespace FestivalProject.BL.Models.UserDto
         public string Street { get; set; }
         public string Psc { get; set; }
         public string Email { get; set; }
-        public string Username { get; set; } 
-        public IList<ReservationListDto> ReservationList { get; set; }
-        
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

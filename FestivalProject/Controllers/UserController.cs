@@ -3,24 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FestivalProject.BL.Facade;
-using FestivalProject.BL.Models;
 using FestivalProject.BL.Models.InterpretDto;
-using FestivalProject.BL.Models.StageDto;
-using FestivalProject.BL.Models.StageInterpretDto;
-using FestivalProject.DAL.Entities;
-using FestivalProject.DAL.Enums;
-using Microsoft.AspNetCore.Http;
+using FestivalProject.BL.Models.UserDto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FestivalProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class InterpretController : Controller
+    public class UserController : Controller
     {
-        private readonly InterpretFacade _facade;
+        private readonly UserFacade _facade;
 
-        public InterpretController(InterpretFacade facade)
+        public UserController(UserFacade facade)
         {
             _facade = facade;
         }
@@ -28,28 +23,26 @@ namespace FestivalProject.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-         
+
             return Ok(_facade.GetAll());
-            
+
         }
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
-            var returnedItem = _facade.GetById(id);
-            if(returnedItem == null) return NotFound();
-            
-            return Ok(returnedItem);
-          
 
+            var returnedItem = _facade.GetById(id);
+            if (returnedItem == null) return NotFound();
+            return Ok(returnedItem);
 
         }
 
 
         [HttpPost]
-        public IActionResult Create([FromBody]InterpretDetailDto item)
+        public IActionResult Create([FromBody] UserCreateEditDto item)
         {
             var returnedItem = _facade.Create(item);
-            if(returnedItem == null)
+            if (returnedItem == null)
                 return BadRequest();
 
             return Ok(returnedItem);
@@ -58,7 +51,7 @@ namespace FestivalProject.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] InterpretDetailDto item)
+        public IActionResult Update([FromBody] UserCreateEditDto item)
         {
             try
             {
@@ -71,7 +64,7 @@ namespace FestivalProject.Controllers
 
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] Guid id )
+        public IActionResult Delete([FromRoute] Guid id)
         {
             try
             {
@@ -83,6 +76,22 @@ namespace FestivalProject.Controllers
                 return NotFound();
             }
 
+        }
+
+        [HttpGet("authenticate/{username}/{password}")]
+        public IActionResult GetLoginByUsername(string username, string password)
+        {
+
+            var returnedItem = _facade.GetByUsername(username);
+            if (returnedItem == null) return NotFound("Login Not Found!");
+
+            if (returnedItem.Password == password)
+            {
+                return Ok(_facade.GetById(returnedItem.Id));
+            }
+            
+            return BadRequest("Wrong password!");
+            
         }
     }
 }

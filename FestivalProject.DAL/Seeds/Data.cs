@@ -116,15 +116,8 @@ namespace FestivalProject.DAL.Seed
             Street = null,
             Psc = null,
             Email = "xspavo00@vutrb.cz",
-            LoginId = Guid.Parse("a2347ca2-4a12-46f6-9013-3596b07c63ed")
-        };
-
-        public static readonly LoginEntity AdminLogin = new LoginEntity
-        {
-            Id = Guid.Parse("a2347ca2-4a12-46f6-9013-3596b07c63ed"),
             Username = "admin",
-            Password = "123",
-            UserId = Guid.Parse("1ae18ad6-9809-4b19-be41-94aa4ff622f8"),
+            Password = "123"
         };
 
         public static readonly UserEntity Viewer1 = new UserEntity
@@ -138,16 +131,10 @@ namespace FestivalProject.DAL.Seed
             Street = "Vajnorska",
             Psc = "03855",
             Email = "trdielko@hotmail.sk",
-            LoginId = Guid.Parse("f7e5a131-c097-47fc-8900-65c51819ecee")
+            Username = "trdielko",
+            Password = "12345"
         };
 
-        public static readonly LoginEntity Viewer1Login = new LoginEntity
-        {
-            Id = Guid.Parse("f7e5a131-c097-47fc-8900-65c51819ecee"),
-            Username = "trdielko",
-            Password = "12345",
-            UserId = Guid.Parse("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1"),
-        };
         public static readonly ReservationEntity Viewer1Reservation = new ReservationEntity
         {
             Id = Guid.Parse("8edf6ecd-8d1d-4fbf-92c1-9640e4bc21d9"),

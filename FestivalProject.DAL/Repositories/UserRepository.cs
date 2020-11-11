@@ -18,6 +18,7 @@ namespace FestivalProject.DAL.Repositories
         }
         public IList<UserEntity> GetAll()
         {
+            var fds =_dbContext.Users.ToList();
             return _dbContext.Users.ToList();
         }
 
@@ -25,12 +26,27 @@ namespace FestivalProject.DAL.Repositories
         {
             return _dbContext.Users.Include(x => x.ReservationList)
                 .ThenInclude(x => x.Festival)
-                .Include(x => x.Login)
-                .First(x => x.Id == id);
+                .FirstOrDefault(x => x.Id == id);
+        }
+
+        public UserEntity GetByUsername(string username)
+        {
+            return _dbContext.Users.Include(x => x.ReservationList)
+                .ThenInclude(x => x.Festival)
+                .FirstOrDefault(x => x.Username == username);
         }
 
         public UserEntity Create(UserEntity item)
         {
+            if (item.Username != null)
+            {
+                var returnedItem = _dbContext.Users.FirstOrDefault(x => x.Username == item.Username);
+                if (returnedItem != null)
+                {
+                    return null;
+                }
+            }
+
             _dbContext.Users.Add(item);
             _dbContext.SaveChanges();
             return item;
@@ -48,9 +64,6 @@ namespace FestivalProject.DAL.Repositories
             //remove all depended reservations
             _dbContext.Reservations
                 .RemoveRange(_dbContext.Reservations.Where((x => x.UserId == id)));
-            //remove login only when user is registered
-            var login = _dbContext.Logins.FirstOrDefault(x => x.UserId == id);
-            if (login != null) _dbContext.Logins.Remove(login);
 
             //remove user
             var entity = _dbContext.Users.First(t => t.Id == id);

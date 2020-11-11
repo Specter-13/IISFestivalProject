@@ -1,14 +1,13 @@
 ﻿using System;
-using FestivalProject.BL.Models.UserDto;
+using System.Collections.Generic;
+using System.Text;
 using FestivalProject.DAL.Entities;
 
-namespace FestivalProject.BL.Models
+namespace FestivalProject.BL.Models.UserDto
 {
-    public class LoginDetailDto: EntityBase
+    public class UserAuthenticateDto : EntityBase
     {
-        
         public string Username { get; set; }
         public string Password { get; set; } // mozno pozuzit nejaky hash na heslo
-        public Guid UserId { get; set; }
     }
 }

@@ -13,8 +13,12 @@ namespace FestivalProject.BL.Mapper
         {
             CreateMap<StageInterpretEntity, StageInterpretForInterpretDto>();
             CreateMap<StageInterpretEntity, StageInterpretForFestivalDto>();
+
             CreateMap<StageInterpretForInterpretDto,StageInterpretEntity>();
             CreateMap<StageInterpretForFestivalDto, StageInterpretEntity>();
+
+            CreateMap<StageInterpretEntity, StageInterpretBaseDto>();
+            CreateMap<StageInterpretBaseDto, StageInterpretEntity>();
         }
     }
 }

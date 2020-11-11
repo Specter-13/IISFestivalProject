@@ -15,9 +15,11 @@ namespace FestivalProject.DAL.Entities
         public string Street { get; set; }
         public string Psc { get; set; }
         public string Email { get; set; }
-        public Guid LoginId { get; set; } 
+        public string Username { get; set; }
+        public string Password { get; set; }
+
         public IList<ReservationEntity> ReservationList { get; set; }
-        public LoginEntity Login { get; set; }
+        
         
     }
 }

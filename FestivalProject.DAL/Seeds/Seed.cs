@@ -163,7 +163,6 @@ namespace FestivalProject.DAL.Seed
             modelBuilder.Entity<UserEntity>(entity =>
             {
                 entity.HasMany(x => x.ReservationList);
-                entity.HasOne(x => x.Login);
                 entity.HasData(new
                 {
                     Data.Admin.Id,
@@ -172,8 +171,9 @@ namespace FestivalProject.DAL.Seed
                     Data.Admin.Country,
                     Data.Admin.City,
                     Data.Admin.Surname,
+                    Data.Admin.Username,
+                    Data.Admin.Password,
                     Data.Admin.Email,
-                    Data.Admin.LoginId,
                     Data.Admin.Psc,
                     Data.Admin.Role
                 });
@@ -185,8 +185,9 @@ namespace FestivalProject.DAL.Seed
                     Data.Viewer1.Country,
                     Data.Viewer1.City,
                     Data.Viewer1.Surname,
+                    Data.Viewer1.Username,
+                    Data.Viewer1.Password,
                     Data.Viewer1.Email,
-                    Data.Viewer1.LoginId,
                     Data.Viewer1.Psc,
                     Data.Viewer1.Role
                 });
@@ -211,31 +212,6 @@ namespace FestivalProject.DAL.Seed
                     Data.Viewer1Reservation.UserId
                 });
               
-            });
-        }
-
-        public static void SeedLogins(this ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<LoginEntity>(entity =>
-            {
-                entity.HasIndex(i => i.Username).IsUnique();
-                entity.HasData(new
-                {
-                    Data.AdminLogin.Id,
-                    Data.AdminLogin.Username,
-                    Data.AdminLogin.Password,
-                    Data.AdminLogin.UserId
-                    
-                });
-                entity.HasData(new
-                {
-                    Data.Viewer1Login.Id,
-                    Data.Viewer1Login.Username,
-                    Data.Viewer1Login.Password,
-                    Data.Viewer1Login.UserId
-
-                });
-
             });
         }
 

@@ -23,7 +23,6 @@ namespace FestivalProject.DAL
         public DbSet<StageEntity> Stages { get; set; }
         public DbSet<ReservationEntity> Reservations { get; set; }
         public DbSet<UserEntity> Users { get; set; }
-        public DbSet<LoginEntity> Logins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,7 +35,6 @@ namespace FestivalProject.DAL
             modelBuilder.SeedStageInterpret();
             modelBuilder.SeedUsers();
             modelBuilder.SeedReservations();
-            modelBuilder.SeedLogins();
 
         }
     }

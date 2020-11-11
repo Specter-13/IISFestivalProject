@@ -7,9 +7,6 @@ namespace FestivalProject.BL.Models.ReservationDto
     {
         public ReservationStatus State { get; set; }
         public string Name { get; set; }
-
-        public string Username { get; set; } // MAPPER FIX
-        public string RealName { get; set; }
-        public string Surname { get; set; }
+        public string FestivalName { get; set; }
     }
 }

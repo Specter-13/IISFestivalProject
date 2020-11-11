@@ -42,12 +42,21 @@ namespace FestivalProject
             services.AddScoped<InterpretRepository>();
             services.AddScoped<FestivalRepository>();
             services.AddScoped<MemberRepository>();
+            services.AddScoped<UserRepository>();
+            services.AddScoped<StageRepository>();
+            services.AddScoped<ReservationRepository>();
 
             services.AddScoped<InterpretFacade>();
             services.AddScoped<FestivalFacade>();
+            services.AddScoped<UserFacade>();
+            services.AddScoped<ReservationFacade>();
+            services.AddScoped<StageFacade>();
+
             services.AddAutoMapper(typeof(InterpretProfiles), typeof(MemberProfiles), 
                 typeof(FestivalProfiles), typeof(FestivalInterpretProfiles),
-                typeof(StageProfiles), typeof(StageInterpretProfiles));
+                typeof(StageProfiles), typeof(StageInterpretProfiles),
+                typeof(UserProfiles),typeof(ReservationProfiles));
+
             services.AddOpenApiDocument(document =>
             {
                 document.DocumentName = "FestivalApi";

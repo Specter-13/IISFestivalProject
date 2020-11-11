@@ -27,6 +27,8 @@
     <Compile Remove="Migrations\20201110002843_MoreTestData3.Designer.cs" />
     <Compile Remove="Migrations\20201110183937_OnDeleteCascade.cs" />
     <Compile Remove="Migrations\20201110183937_OnDeleteCascade.Designer.cs" />
+    <Compile Remove="Migrations\20201111000228_AddStageData.cs" />
+    <Compile Remove="Migrations\20201111000228_AddStageData.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

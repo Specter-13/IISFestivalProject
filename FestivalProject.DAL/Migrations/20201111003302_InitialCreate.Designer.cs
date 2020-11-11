@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FestivalProject.DAL.Migrations
 {
     [DbContext(typeof(FestivalDbContext))]
-    [Migration("20201110003358_InitialCreate")]
+    [Migration("20201111003302_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,9 @@ namespace FestivalProject.DAL.Migrations
                     b.Property<int>("Genre")
                         .HasColumnType("int");
 
+                    b.Property<string>("LogoUri")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -71,6 +74,7 @@ namespace FestivalProject.DAL.Migrations
                             Description = "One of the best festivals in Slovakia!",
                             EndTime = new DateTime(2020, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Genre = 0,
+                            LogoUri = "https://www.gregi.net/wp-content/uploads/2018/07/logo-1.jpg",
                             Name = "Grape",
                             Price = 55m,
                             StartTime = new DateTime(2020, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -86,9 +90,6 @@ namespace FestivalProject.DAL.Migrations
                     b.Property<Guid>("FestivalId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("InterpretId", "FestivalId");
 
                     b.HasIndex("FestivalId");
@@ -99,14 +100,12 @@ namespace FestivalProject.DAL.Migrations
                         new
                         {
                             InterpretId = new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"),
-                            FestivalId = new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"),
-                            Id = new Guid("5da19889-e894-40ad-8033-85d634027e3a")
+                            FestivalId = new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e")
                         },
                         new
                         {
                             InterpretId = new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"),
-                            FestivalId = new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"),
-                            Id = new Guid("90a9ab90-4e0f-41f2-be37-3f170514f2f3")
+                            FestivalId = new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e")
                         });
                 });
 
@@ -173,8 +172,6 @@ namespace FestivalProject.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.HasIndex("Username")
                         .IsUnique()
                         .HasFilter("[Username] IS NOT NULL");
@@ -204,9 +201,6 @@ namespace FestivalProject.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("InterpretEntityId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("InterpretId")
                         .HasColumnType("uniqueidentifier");
 
@@ -218,7 +212,7 @@ namespace FestivalProject.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InterpretEntityId");
+                    b.HasIndex("InterpretId");
 
                     b.ToTable("Members");
 
@@ -316,6 +310,13 @@ namespace FestivalProject.DAL.Migrations
                             Capacity = 600,
                             FestivalId = new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"),
                             Name = "Main Stage"
+                        },
+                        new
+                        {
+                            Id = new Guid("4afd5bb9-6c95-411b-becf-daffb873a7a4"),
+                            Capacity = 200,
+                            FestivalId = new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"),
+                            Name = "Low Stage"
                         });
                 });
 
@@ -333,9 +334,6 @@ namespace FestivalProject.DAL.Migrations
                     b.Property<DateTime>("ConcertStart")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("InterpretId", "StageId");
 
                     b.HasIndex("StageId");
@@ -348,16 +346,14 @@ namespace FestivalProject.DAL.Migrations
                             InterpretId = new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"),
                             StageId = new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"),
                             ConcertLength = new TimeSpan(0, 2, 30, 0, 0),
-                            ConcertStart = new DateTime(2020, 7, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            Id = new Guid("579ed9de-3b43-494e-98e2-102bf7609447")
+                            ConcertStart = new DateTime(2020, 7, 25, 15, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             InterpretId = new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"),
                             StageId = new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"),
                             ConcertLength = new TimeSpan(0, 3, 30, 0, 0),
-                            ConcertStart = new DateTime(2020, 7, 26, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            Id = new Guid("9c8bc32e-3239-45a2-a549-bba824deb663")
+                            ConcertStart = new DateTime(2020, 7, 26, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -395,6 +391,8 @@ namespace FestivalProject.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LoginId");
 
                     b.ToTable("Users");
 
@@ -439,20 +437,13 @@ namespace FestivalProject.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FestivalProject.DAL.Entities.LoginEntity", b =>
-                {
-                    b.HasOne("FestivalProject.DAL.Entities.UserEntity", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("FestivalProject.DAL.Entities.MemberEntity", b =>
                 {
-                    b.HasOne("FestivalProject.DAL.Entities.InterpretEntity", null)
+                    b.HasOne("FestivalProject.DAL.Entities.InterpretEntity", "Interpret")
                         .WithMany("MemberList")
-                        .HasForeignKey("InterpretEntityId");
+                        .HasForeignKey("InterpretId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FestivalProject.DAL.Entities.ReservationEntity", b =>
@@ -490,6 +481,15 @@ namespace FestivalProject.DAL.Migrations
                     b.HasOne("FestivalProject.DAL.Entities.StageEntity", "Stage")
                         .WithMany("StageInterpret")
                         .HasForeignKey("StageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FestivalProject.DAL.Entities.UserEntity", b =>
+                {
+                    b.HasOne("FestivalProject.DAL.Entities.LoginEntity", "Login")
+                        .WithMany()
+                        .HasForeignKey("LoginId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

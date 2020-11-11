@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FestivalProject.DAL;
 using FestivalProject.DAL.Entities;
@@ -33,16 +34,8 @@ namespace FestivalProject.Tests
         [Fact]
         public void Interpret_GetById()
         {
-            var interpret = new InterpretEntity()
-            {
-                Id = Guid.Parse("c993e8d3-719b-43d7-908b-e26dc6f4ace0"),
-                Name = "Metallica",
-                LogoUri =
-                    "https://www.adamdurica.com/wp-content/uploads/2019/04/album_adam_durica_mandolina-400x400.jpg",
-                Rating = 9.7f,
-                Genre = MusicGenre.Metal,
-                Description = "Without word one of the best metal groups."
-            };
+            var id = Guid.Parse("0c41b222-d06b-4021-9668-a4f845bbe57b");
+           
 
 
             var returnedInterpret = _testContext.Interprets
@@ -51,9 +44,9 @@ namespace FestivalProject.Tests
                     .ThenInclude(x=> x.Festival)
                 .Include(x => x.StageInterpret)
                     .ThenInclude(x => x.Stage)
-                .First(x => x.Id == interpret.Id);
+                .First(x => x.Id == id);
 
-            Assert.Equal(interpret.Id, returnedInterpret.Id);
+            Assert.Equal(id, returnedInterpret.Id);
             Assert.NotNull(returnedInterpret.FestivalInterpret);
             Assert.NotNull(returnedInterpret.StageInterpret);
             Assert.NotNull(returnedInterpret.MemberList);
@@ -121,12 +114,13 @@ namespace FestivalProject.Tests
             };
 
 
-            var returnedFestival = _testContext.Users
+            var returnedUser = _testContext.Users
                 .Include(x => x.ReservationList)
                 .ThenInclude(x => x.Festival)
+                .Include(x=> x.Login)
                 .First(x => x.Id == festival.Id);
 
-            Assert.Equal(festival.Id, returnedFestival.Id);
+            Assert.Equal(festival.Id, returnedUser.Id);
 
         }
 
@@ -178,7 +172,6 @@ namespace FestivalProject.Tests
 
 
             var returnedLoginsList = _testContext.Logins
-                .Include(x => x.User)
                 .ToList();
 
             Assert.Equal(logins, returnedLoginsList.Count);
@@ -198,7 +191,6 @@ namespace FestivalProject.Tests
 
 
             var returnedLogin = _testContext.Logins
-                .Include(x => x.User)
                 .First(x => x.Username == login.Username);
 
             Assert.Equal(returnedLogin.Id, login.Id);
@@ -342,6 +334,96 @@ namespace FestivalProject.Tests
             Assert.Null(notExistingEntity);
             Assert.Null(nonExistingLogin);
             Assert.Empty(reservations);
+
+        }
+
+        [Fact]
+        public void User_Create()
+        {
+
+            var user = new UserEntity()
+            {
+                Role = UserRoles.Viewer,
+                Name = "Michal",
+                Surname = "Trkotko",
+                Country = "Slovakia",
+                City = "Bratislava",
+                Street = "Vajnorska",
+                Psc = "03855",
+                Email = "trdielko@hotmail.sk",
+            };
+
+
+           var createdUser= _testContext.Users.Add(user);
+            _testContext.SaveChanges();
+
+            var isCreated =_testContext.Users.FirstOrDefault(x => x.Id == user.Id);
+
+            Assert.NotNull(createdUser);
+            Assert.NotNull(isCreated);
+
+        }
+
+        [Fact]
+        public void Interpret_Create()
+        {
+
+            var interpret = new InterpretEntity()
+            {
+                Name = "Michal Docolomansky",
+                LogoUri = "https://www.adamdurica.com/wp-content/uploads/2019/04/album_adam_durica_mandolina-400x400.jpg",
+                Rating = 1.7f,
+                Genre = MusicGenre.Chill,
+                Description = "One of the most talented slovak singer.",
+                MemberList = new List<MemberEntity>()
+                {
+                    new MemberEntity
+                    {
+                        Name = "Misko",
+                        Surname = "ten",
+                    },
+                    new MemberEntity
+                    {
+                        Name = "lukas",
+                        Surname = "moj",
+                    }
+                },
+                StageInterpret = new List<StageInterpretEntity>()
+                {
+                    new StageInterpretEntity
+                    {
+                        StageId = Guid.Parse("cb22c323-729d-49e6-834a-644d47d3dc4c"),
+                        ConcertLength = new TimeSpan(0, 3, 30, 0),
+                        ConcertStart = new DateTime(2025, 7, 15, 15, 0, 0),
+
+                    },
+
+                    new StageInterpretEntity
+                    {
+                        StageId = Guid.Parse("4afd5bb9-6c95-411b-becf-daffb873a7a4"),
+                        ConcertLength = new TimeSpan(0, 3, 30, 0),
+                        ConcertStart = new DateTime(2025, 7, 15, 15, 0, 0),
+
+                    },
+
+                }
+
+
+            };
+
+
+            var createdUser = _testContext.Interprets.Add(interpret);
+            _testContext.SaveChanges();
+
+            var isCreated = _testContext.Interprets.Include(x => x.MemberList)
+                .Include(x => x.FestivalInterpret)
+                .ThenInclude(x => x.Festival)
+                .Include(x => x.StageInterpret)
+                .ThenInclude(x => x.Stage).FirstOrDefault(x => x.Id == createdUser.Entity.Id);
+
+            Assert.NotNull(createdUser);
+            Assert.NotNull(isCreated);
+            Assert.NotNull(isCreated.StageInterpret);
 
         }
 

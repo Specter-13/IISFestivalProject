@@ -7,7 +7,7 @@ using FestivalProject.DAL.Interfaces;
 
 namespace FestivalProject.DAL.Repositories
 {
-    public class StageInterpretRepository : IGenericBindingTablesOperations<StageInterpretEntity>
+    public class StageInterpretRepository 
     {
         private readonly FestivalDbContext _dbContext;
 
@@ -29,9 +29,9 @@ namespace FestivalProject.DAL.Repositories
             return item;
         }
 
-        public void Delete(Guid id)
+        public void Delete(Guid id1, Guid id2)
         {
-            var entity = _dbContext.StageInterprets.First(t => t.Id == id);
+            var entity = _dbContext.StageInterprets.First(t => t.StageId == id1 && t.InterpretId == id2);
             _dbContext.Remove(entity);
             _dbContext.SaveChanges();
         }

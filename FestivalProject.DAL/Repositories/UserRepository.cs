@@ -25,6 +25,7 @@ namespace FestivalProject.DAL.Repositories
         {
             return _dbContext.Users.Include(x => x.ReservationList)
                 .ThenInclude(x => x.Festival)
+                .Include(x => x.Login)
                 .First(x => x.Id == id);
         }
 

@@ -49,12 +49,22 @@ namespace FestivalProject.DAL.Seed
 
         };
 
+        public static readonly StageEntity LowStage = new StageEntity
+        {
+            Id = Guid.Parse("4afd5bb9-6c95-411b-becf-daffb873a7a4"),
+            Name = "Low Stage",
+            Capacity = 200,
+            FestivalId = Guid.Parse("46abef51-c53f-4cc5-a270-a2756ef1455e"),
+
+        };
+
         public static readonly FestivalEntity FestivalGrape = new FestivalEntity
         {
             Id = Guid.Parse("46abef51-c53f-4cc5-a270-a2756ef1455e"),
             Capacity = 1500,
             Name = "Grape",
             City = "Piestany",
+            LogoUri = "https://www.gregi.net/wp-content/uploads/2018/07/logo-1.jpg",
             Street = "Letiskova 123",
             Country = "Slovakia",
             Description = "One of the best festivals in Slovakia!",
@@ -66,7 +76,6 @@ namespace FestivalProject.DAL.Seed
         };
         public static readonly FestivalInterpretEntity FestivalInterpretGrapeDurica = new FestivalInterpretEntity
         {
-            Id = Guid.Parse("5da19889-e894-40ad-8033-85d634027e3a"),
             FestivalId = Guid.Parse("46abef51-c53f-4cc5-a270-a2756ef1455e"),
             InterpretId = Guid.Parse("0c41b222-d06b-4021-9668-a4f845bbe57b")
 
@@ -74,7 +83,6 @@ namespace FestivalProject.DAL.Seed
 
         public static readonly FestivalInterpretEntity FestivalInterpretGrapeMetallica = new FestivalInterpretEntity
         {
-            Id = Guid.Parse("90a9ab90-4e0f-41f2-be37-3f170514f2f3"),
             FestivalId = Guid.Parse("46abef51-c53f-4cc5-a270-a2756ef1455e"),
             InterpretId = Guid.Parse("c993e8d3-719b-43d7-908b-e26dc6f4ace0")
 
@@ -82,15 +90,15 @@ namespace FestivalProject.DAL.Seed
 
         public static readonly StageInterpretEntity StageInterpretDuricaMainStage = new StageInterpretEntity
         {
-            Id = Guid.Parse("579ed9de-3b43-494e-98e2-102bf7609447"),
             InterpretId = Guid.Parse("0c41b222-d06b-4021-9668-a4f845bbe57b"),
             StageId = Guid.Parse("cb22c323-729d-49e6-834a-644d47d3dc4c"),
             ConcertLength = new TimeSpan(0, 2, 30, 0),
             ConcertStart = new DateTime(2020, 7, 25, 15, 0, 0)
         };
+
+
         public static readonly StageInterpretEntity StageInterpretMetallicaMainStage = new StageInterpretEntity
         {
-            Id = Guid.Parse("9c8bc32e-3239-45a2-a549-bba824deb663"),
             InterpretId = Guid.Parse("c993e8d3-719b-43d7-908b-e26dc6f4ace0"),
             StageId = Guid.Parse("cb22c323-729d-49e6-834a-644d47d3dc4c"),
             ConcertLength = new TimeSpan(0, 3, 30, 0),

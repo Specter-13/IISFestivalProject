@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using FestivalProject.BL.Models.FestivalInterpretDto;
+using FestivalProject.BL.Models.StageDto;
+using FestivalProject.DAL.Entities;
 using FestivalProject.DAL.Enums;
 
-namespace FestivalProject.DAL.Entities
+namespace FestivalProject.BL.Models.FestivalDto
 {
-    public class FestivalEntity : EntityBase
+    public class FestivalDetailDto : EntityBase
     {
         public string Name { get; set; }
         public MusicGenre Genre { get; set; }
@@ -17,12 +19,11 @@ namespace FestivalProject.DAL.Entities
         public string Description { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         public int Capacity { get; set; }
 
-        public IList<StageEntity> StageList { get; set; }
-        public IList<FestivalInterpretEntity> FestivalInterpret { get; set; }
+        public IList<StageDetailDto> StageList { get; set; }
+        public IList<FestivalInterpretForInterpretDto> FestivalInterpret { get; set; }
 
     }
 }

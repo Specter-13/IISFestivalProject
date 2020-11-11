@@ -33,6 +33,8 @@ namespace FestivalProject.DAL.Seed
         {
             modelBuilder.Entity<InterpretEntity>(entity =>
             {
+                entity.HasMany(x => x.MemberList)
+                    .WithOne(x => x.Interpret);
                 entity.HasData(new
                 {
                     Data.AdamDurica.Id,
@@ -54,7 +56,7 @@ namespace FestivalProject.DAL.Seed
             });
         }
 
-        public static void SeedMainStage(this ModelBuilder modelBuilder)
+        public static void SeedStages(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StageEntity>(entity =>
             {
@@ -66,6 +68,13 @@ namespace FestivalProject.DAL.Seed
                     Data.MainStage.Capacity,
                     Data.MainStage.Name,
                     Data.MainStage.FestivalId
+                });
+                entity.HasData(new
+                {
+                    Data.LowStage.Id,
+                    Data.LowStage.Capacity,
+                    Data.LowStage.Name,
+                    Data.LowStage.FestivalId
                 });
             });
         }
@@ -84,6 +93,7 @@ namespace FestivalProject.DAL.Seed
                     Data.FestivalGrape.Street,
                     Data.FestivalGrape.Genre,
                     Data.FestivalGrape.Capacity,
+                    Data.FestivalGrape.LogoUri,
                     Data.FestivalGrape.City,
                     Data.FestivalGrape.Country,
                     Data.FestivalGrape.Description,
@@ -107,13 +117,11 @@ namespace FestivalProject.DAL.Seed
                     .HasForeignKey(bc => bc.InterpretId);
                 entity.HasData(new
                 {
-                    Data.FestivalInterpretGrapeDurica.Id,
                     Data.FestivalInterpretGrapeDurica.InterpretId,
                     Data.FestivalInterpretGrapeDurica.FestivalId
                 });
                 entity.HasData(new
                 {
-                    Data.FestivalInterpretGrapeMetallica.Id,
                     Data.FestivalInterpretGrapeMetallica.InterpretId,
                     Data.FestivalInterpretGrapeMetallica.FestivalId
                 });
@@ -133,7 +141,6 @@ namespace FestivalProject.DAL.Seed
                     .HasForeignKey(bc => bc.InterpretId);
                 entity.HasData(new
                 {
-                    Data.StageInterpretDuricaMainStage.Id,
                     Data.StageInterpretDuricaMainStage.StageId,
                     Data.StageInterpretDuricaMainStage.InterpretId,
                     Data.StageInterpretDuricaMainStage.ConcertLength,
@@ -142,7 +149,6 @@ namespace FestivalProject.DAL.Seed
                 });
                 entity.HasData(new
                 {
-                    Data.StageInterpretMetallicaMainStage.Id,
                     Data.StageInterpretMetallicaMainStage.StageId,
                     Data.StageInterpretMetallicaMainStage.InterpretId,
                     Data.StageInterpretMetallicaMainStage.ConcertLength,
@@ -157,6 +163,7 @@ namespace FestivalProject.DAL.Seed
             modelBuilder.Entity<UserEntity>(entity =>
             {
                 entity.HasMany(x => x.ReservationList);
+                entity.HasOne(x => x.Login);
                 entity.HasData(new
                 {
                     Data.Admin.Id,
@@ -212,7 +219,6 @@ namespace FestivalProject.DAL.Seed
             modelBuilder.Entity<LoginEntity>(entity =>
             {
                 entity.HasIndex(i => i.Username).IsUnique();
-                entity.HasOne(x => x.User);
                 entity.HasData(new
                 {
                     Data.AdminLogin.Id,

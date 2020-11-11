@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FestivalProject.DAL.Entities
 {
-    public class FestivalInterpretEntity : EntityBase
+    public class FestivalInterpretEntity 
     {
         
         public Guid FestivalId { get; set; }

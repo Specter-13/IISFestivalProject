@@ -2,7 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.Internal;
+using FestivalProject.BL.Facade;
+using FestivalProject.BL.Mapper;
 using FestivalProject.DAL;
+using FestivalProject.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +35,15 @@ namespace FestivalProject
             //services.AddDbContext<FestivalDbContext>(options => options.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog = FestivalDB;MultipleActiveResultSets = True;Integrated Security = True;"));
             services.AddDbContext<FestivalDbContext>(option => option.UseSqlServer(Configuration["database:connection"]));
             services.AddControllers();
+
+            services.AddScoped<InterpretRepository>();
+            services.AddScoped<MemberRepository>();
+
+
+            services.AddScoped<InterpretFacade>();
+            services.AddAutoMapper(typeof(InterpretProfiles), typeof(MemberProfiles), 
+                typeof(FestivalProfiles), typeof(FestivalInterpretProfiles),
+                typeof(StageProfiles), typeof(StageInterpretProfiles));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

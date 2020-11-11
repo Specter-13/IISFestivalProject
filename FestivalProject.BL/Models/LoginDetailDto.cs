@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using FestivalProject.BL.Models.UserDto;
+using FestivalProject.DAL.Entities;
 
-
-namespace FestivalProject.DAL.Entities
+namespace FestivalProject.BL.Models
 {
-    public class LoginEntity: EntityBase
+    public class LoginDetailDto: EntityBase
     {
         
         public string Username { get; set; }

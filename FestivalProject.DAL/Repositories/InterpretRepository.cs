@@ -37,6 +37,11 @@ namespace FestivalProject.DAL.Repositories
 
         public InterpretEntity Create(InterpretEntity item)
         {
+            var returnedItem = _dbContext.Interprets.FirstOrDefault(x => x.Name == item.Name);
+            if (returnedItem != null)
+            {
+                return null;
+            }
             _dbContext.Interprets.Add(item);
             _dbContext.SaveChanges();
             return item;

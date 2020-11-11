@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using FestivalProject.BL.Models.ReservationDto;
+using FestivalProject.DAL.Entities;
 using FestivalProject.DAL.Enums;
 
-namespace FestivalProject.DAL.Entities
+namespace FestivalProject.BL.Models.UserDto
 {
-    public class UserEntity : EntityBase
+    public class UserDetailDto : EntityBase
     {
         public UserRoles Role { get; set; }
         public string Name { get; set; }
@@ -15,9 +16,8 @@ namespace FestivalProject.DAL.Entities
         public string Street { get; set; }
         public string Psc { get; set; }
         public string Email { get; set; }
-        public Guid LoginId { get; set; } 
-        public IList<ReservationEntity> ReservationList { get; set; }
-        public LoginEntity Login { get; set; }
+        public string Username { get; set; } // mapper fix
+        public IList<ReservationDetailDto> ReservationList { get; set; }
         
     }
 }

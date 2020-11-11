@@ -9,5 +9,6 @@ namespace FestivalProject.DAL.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public Guid InterpretId { get; set; }
+        public InterpretEntity Interpret { get; set; }
     }
 }

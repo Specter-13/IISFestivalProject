@@ -30,7 +30,7 @@ namespace FestivalProject.DAL
             base.OnModelCreating(modelBuilder);
             modelBuilder.SeedMembers();
             modelBuilder.SeedInterprets();
-            modelBuilder.SeedMainStage();
+            modelBuilder.SeedStages();
             modelBuilder.SeedFestivals();
             modelBuilder.SeedFestivalInterpret();
             modelBuilder.SeedStageInterpret();

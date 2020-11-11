@@ -19,20 +19,17 @@ namespace FestivalProject.DAL.Repositories
         public IList<LoginEntity> GetAll()
         {
             return _dbContext.Logins
-                .Include(x => x.User)
                 .ToList();
         }
 
         public LoginEntity GetById(Guid id)
         {
             return _dbContext.Logins
-                .Include(x => x.User)
                 .First(x => x.Id == id);
         }
         public LoginEntity GetByUsername(string name)
         {
             return _dbContext.Logins
-                .Include(x => x.User)
                 .First(x => x.Username == name);
         }
 

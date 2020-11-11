@@ -22,8 +22,8 @@ namespace FestivalProject.BL.Models.FestivalDto
         public decimal Price { get; set; }
         public int Capacity { get; set; }
 
-        public IList<StageDetailDto> StageList { get; set; }
-        public IList<FestivalInterpretForInterpretDto> FestivalInterpret { get; set; }
+        public IList<StageForFestivalDto> StageList { get; set; }
+        public IList<FestivalInterpretForFestivalDto> FestivalInterpret { get; set; }
 
     }
 }

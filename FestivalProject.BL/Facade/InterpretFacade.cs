@@ -35,12 +35,12 @@ namespace FestivalProject.BL.Facade
 
         public InterpretDetailDto Update(InterpretDetailDto item)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<InterpretDetailDto>(_repo.Update(_mapper.Map<InterpretEntity>(item)));
         }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+           _repo.Delete(id);
         }
     }
 }

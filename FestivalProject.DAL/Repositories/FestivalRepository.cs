@@ -29,7 +29,7 @@ namespace FestivalProject.DAL.Repositories
                 .ThenInclude(x => x.StageInterpret)
                 .Include(x => x.FestivalInterpret)
                 .ThenInclude(x => x.Interpret)
-                .First(x => x.Id == id);
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public FestivalEntity Create(FestivalEntity item)

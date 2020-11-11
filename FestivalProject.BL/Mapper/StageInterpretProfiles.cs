@@ -12,7 +12,9 @@ namespace FestivalProject.BL.Mapper
         public StageInterpretProfiles()
         {
             CreateMap<StageInterpretEntity, StageInterpretForInterpretDto>();
+            CreateMap<StageInterpretEntity, StageInterpretForFestivalDto>();
             CreateMap<StageInterpretForInterpretDto,StageInterpretEntity>();
+            CreateMap<StageInterpretForFestivalDto, StageInterpretEntity>();
         }
     }
 }

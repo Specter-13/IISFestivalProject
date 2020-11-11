@@ -14,6 +14,8 @@ namespace FestivalProject.BL.Mapper
         {
             CreateMap<FestivalEntity, FestivalDetailDto>();
             CreateMap<FestivalEntity, FestivalListDto>();
+            CreateMap<FestivalListDto,FestivalEntity>();
+            CreateMap<FestivalDetailDto, FestivalEntity>();
         }
     }
 }

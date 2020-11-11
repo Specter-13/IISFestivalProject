@@ -3,24 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FestivalProject.BL.Facade;
-using FestivalProject.BL.Models;
+using FestivalProject.BL.Models.FestivalDto;
 using FestivalProject.BL.Models.InterpretDto;
-using FestivalProject.BL.Models.StageDto;
-using FestivalProject.BL.Models.StageInterpretDto;
-using FestivalProject.DAL.Entities;
-using FestivalProject.DAL.Enums;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FestivalProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class InterpretController : Controller
+    public class FestivalController : Controller
     {
-        private readonly InterpretFacade _facade;
+        private readonly FestivalFacade _facade;
 
-        public InterpretController(InterpretFacade facade)
+        public FestivalController(FestivalFacade facade)
         {
             _facade = facade;
         }
@@ -28,31 +23,28 @@ namespace FestivalProject.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-         
+
             return Ok(_facade.GetAll());
-            
+
         }
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
-            try
-            {
-                return Ok(_facade.GetById(id));
-            }
-            catch 
-            {
-                return NotFound();
-            }
+            
+            var returnedItem = _facade.GetById(id);
+            if (returnedItem == null) return NotFound();
+            return Ok(_facade.GetById(id));
+            
 
 
         }
 
 
         [HttpPost]
-        public IActionResult Create([FromBody]InterpretDetailDto item)
+        public IActionResult Create([FromBody] FestivalDetailDto item)
         {
             var returnedItem = _facade.Create(item);
-            if(returnedItem == null)
+            if (returnedItem == null)
                 return BadRequest();
 
             return Ok(returnedItem);
@@ -61,7 +53,7 @@ namespace FestivalProject.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] InterpretDetailDto item)
+        public IActionResult Update([FromBody] FestivalDetailDto item)
         {
             try
             {
@@ -74,7 +66,7 @@ namespace FestivalProject.Controllers
 
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] Guid id )
+        public IActionResult Delete([FromRoute] Guid id)
         {
             try
             {

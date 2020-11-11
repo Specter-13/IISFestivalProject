@@ -13,6 +13,10 @@ namespace FestivalProject.BL.Mapper
         public FestivalInterpretProfiles()
         {
             CreateMap<FestivalInterpretEntity, FestivalInterpretForInterpretDto>();
+            CreateMap<FestivalInterpretEntity, FestivalInterpretForFestivalDto>();
+
+            CreateMap<FestivalInterpretForInterpretDto,FestivalInterpretEntity>();
+            CreateMap<FestivalInterpretForFestivalDto,FestivalInterpretEntity>();
         }
     }
 }

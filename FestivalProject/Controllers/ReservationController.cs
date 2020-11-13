@@ -12,7 +12,6 @@ namespace FestivalProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [EnableCors("AllowOrigin")]
     public class ReservationController : Controller
     {
         private readonly ReservationFacade _facade;

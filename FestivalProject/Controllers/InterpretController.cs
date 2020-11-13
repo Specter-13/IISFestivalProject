@@ -17,7 +17,6 @@ namespace FestivalProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [EnableCors("AllowOrigin")]
     public class InterpretController : Controller
     {
         private readonly InterpretFacade _facade;

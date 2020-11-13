@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using FestivalProject.BL.Facade;
 using FestivalProject.BL.Models.FestivalDto;
 using FestivalProject.BL.Models.InterpretDto;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FestivalProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowOrigin")]
     public class FestivalController : Controller
     {
         private readonly FestivalFacade _facade;

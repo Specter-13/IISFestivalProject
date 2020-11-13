@@ -9,6 +9,7 @@ using FestivalProject.BL.Models.StageDto;
 using FestivalProject.BL.Models.StageInterpretDto;
 using FestivalProject.DAL.Entities;
 using FestivalProject.DAL.Enums;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace FestivalProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowOrigin")]
     public class InterpretController : Controller
     {
         private readonly InterpretFacade _facade;

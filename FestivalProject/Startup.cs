@@ -36,11 +36,7 @@ namespace FestivalProject
         public void ConfigureServices(IServiceCollection services)
         {
 
-
-            services.AddCors(c =>
-            {
-                c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://localhost:3000/"));
-            });
+            services.AddCors();
 
             //services.AddDbContext<FestivalDbContext>(options => options.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog = FestivalDB;MultipleActiveResultSets = True;Integrated Security = True;"));
             services.AddDbContext<FestivalDbContext>(option => option.UseSqlServer(Configuration["database:connection"]));
@@ -84,6 +80,12 @@ namespace FestivalProject
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.UseAuthorization();
 
@@ -99,7 +101,7 @@ namespace FestivalProject
                 settings.SwaggerRoutes.Add(new SwaggerUi3Route("FestivalApi", "/Swagger/FestivalApi/swagger.json"));
             });
 
-            app.UseCors(options => options.WithOrigins("http://localhost:3000/"));
+           
 
         }
 

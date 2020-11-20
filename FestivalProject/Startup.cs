@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.Internal;
 using FestivalProject.BL.Facade;
+using FestivalProject.BL.Helpers;
 using FestivalProject.BL.Mapper;
+using FestivalProject.BL.Services;
 using FestivalProject.DAL;
 using FestivalProject.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -47,7 +49,6 @@ namespace FestivalProject
                     });
             });
             services.AddMvc(option => option.EnableEndpointRouting = false);
-            //services.AddDbContext<FestivalDbContext>(options => options.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog = FestivalDB;MultipleActiveResultSets = True;Integrated Security = True;"));
             services.AddDbContext<FestivalDbContext>(option => option.UseSqlServer(Configuration["database:connection"]));
             services.AddControllers();
 
@@ -63,6 +64,7 @@ namespace FestivalProject
             services.AddScoped<UserFacade>();
             services.AddScoped<ReservationFacade>();
             services.AddScoped<StageFacade>();
+            
 
             services.AddAutoMapper(typeof(InterpretProfiles), typeof(MemberProfiles), 
                 typeof(FestivalProfiles), typeof(FestivalInterpretProfiles),
@@ -75,7 +77,9 @@ namespace FestivalProject
                 document.Title = "FestivalApi";
             });
 
-           
+            // configure strongly typed settings object
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
 
 
         }
@@ -108,8 +112,9 @@ namespace FestivalProject
             {
                 settings.SwaggerRoutes.Add(new SwaggerUi3Route("FestivalApi", "/Swagger/FestivalApi/swagger.json"));
             });
+            app.UseMiddleware<JwtMiddleware>();
 
-           
+
 
         }
 

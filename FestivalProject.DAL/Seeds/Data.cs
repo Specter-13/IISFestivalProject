@@ -74,6 +74,29 @@ namespace FestivalProject.DAL.Seed
             Price = 55,
 
         };
+
+        public static readonly FestivalEntity FestivalPohoda = new FestivalEntity
+        {
+            Id = Guid.Parse("30d09c0f-f6aa-442c-9d87-2869faf175f4"),
+            Capacity = 10000,
+            Name = "Pohoda",
+            City = "Trenčin",
+            LogoUri = "https://dl-media.viber.com/5/share/2/long/vibes/icon/image/0x0/105c/2c48f0221e7b0b58487a6483ba8c19e8a0a4f4d27a7e0291932b5dc92c41105c.jpg",
+            Street = "Letisko",
+            Country = "Slovakia",
+            Description = "The best festivals in Slovakia!",
+            StartTime = new DateTime(2020, 8, 6),
+            EndTime = new DateTime(2020, 8, 10),
+            Genre = MusicGenre.Rock,
+            Price = 70,
+
+        };
+        public static readonly FestivalInterpretEntity FestivalInterpretPohodaDurica = new FestivalInterpretEntity
+        {
+            FestivalId = Guid.Parse("30d09c0f-f6aa-442c-9d87-2869faf175f4"),
+            InterpretId = Guid.Parse("0c41b222-d06b-4021-9668-a4f845bbe57b")
+
+        };
         public static readonly FestivalInterpretEntity FestivalInterpretGrapeDurica = new FestivalInterpretEntity
         {
             FestivalId = Guid.Parse("46abef51-c53f-4cc5-a270-a2756ef1455e"),

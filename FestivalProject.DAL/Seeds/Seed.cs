@@ -102,6 +102,22 @@ namespace FestivalProject.DAL.Seed
                     Data.FestivalGrape.Price,
                    
                 });
+                entity.HasData(new
+                {
+                    Data.FestivalPohoda.Id,
+                    Data.FestivalPohoda.Name,
+                    Data.FestivalPohoda.Street,
+                    Data.FestivalPohoda.Genre,
+                    Data.FestivalPohoda.Capacity,
+                    Data.FestivalPohoda.LogoUri,
+                    Data.FestivalPohoda.City,
+                    Data.FestivalPohoda.Country,
+                    Data.FestivalPohoda.Description,
+                    Data.FestivalPohoda.StartTime,
+                    Data.FestivalPohoda.EndTime,
+                    Data.FestivalPohoda.Price,
+
+                });
             });
         }
         public static void SeedFestivalInterpret(this ModelBuilder modelBuilder)
@@ -124,6 +140,11 @@ namespace FestivalProject.DAL.Seed
                 {
                     Data.FestivalInterpretGrapeMetallica.InterpretId,
                     Data.FestivalInterpretGrapeMetallica.FestivalId
+                });
+                entity.HasData(new
+                {
+                    Data.FestivalInterpretPohodaDurica.InterpretId,
+                    Data.FestivalInterpretPohodaDurica.FestivalId
                 });
             });
         }

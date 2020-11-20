@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FestivalProject.BL.Facade;
 using FestivalProject.BL.Models.InterpretDto;
 using FestivalProject.BL.Models.UserDto;
+using FestivalProject.BL.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +16,12 @@ namespace FestivalProject.Controllers
     public class UserController : Controller
     {
         private readonly UserFacade _facade;
+        private readonly IUserAuthenticationService _authentication;
 
-        public UserController(UserFacade facade)
+        public UserController(UserFacade facade, IUserAuthenticationService authentication)
         {
             _facade = facade;
+            _authentication = authentication;
         }
 
         [HttpGet]
@@ -79,20 +82,17 @@ namespace FestivalProject.Controllers
 
         }
 
-        [HttpGet("authenticate/{username}/{password}")]
-        public IActionResult GetLoginByUsername(string username, string password)
+        [HttpPost("authenticate")]
+        public IActionResult AuthenticateUser([FromBody] UserAuthenticateDto item)
         {
 
-            var returnedItem = _facade.GetByUsername(username);
-            if (returnedItem == null) return NotFound("Login Not Found!");
+            var response = _authentication.Authenticate(item);
 
-            if (returnedItem.Password == password)
-            {
-                return Ok(_facade.GetById(returnedItem.Id));
-            }
-            
-            return BadRequest("Wrong password!");
-            
+            if (response == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            return Ok(response);
+
         }
     }
 }

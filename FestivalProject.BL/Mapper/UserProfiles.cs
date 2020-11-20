@@ -19,6 +19,9 @@ namespace FestivalProject.BL.Mapper
 
             CreateMap<UserEntity, UserListDto>();
             CreateMap<UserEntity, UserDetailDto>();
+
+            CreateMap<UserDetailDto, UserDetailAuthenticateDto>().ForMember(x => x.Token, opt => opt.Ignore()); ;
+           
         }
     }
 }

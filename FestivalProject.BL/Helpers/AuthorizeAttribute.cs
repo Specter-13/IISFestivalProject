@@ -13,7 +13,7 @@ namespace FestivalProject.BL.Helpers
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = (UserDetailDto)context.HttpContext.Items["User"];
+            var user = (UserDetailDto)context.HttpContext.Items["UserDetailDto"];
             if (user == null)
             {
                 // not logged in

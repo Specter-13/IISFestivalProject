@@ -96,6 +96,7 @@ namespace FestivalProject
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseMiddleware<JwtMiddleware>();
             // global cors policy
             app.UseCors("AllOrigins");
 
@@ -112,7 +113,7 @@ namespace FestivalProject
             {
                 settings.SwaggerRoutes.Add(new SwaggerUi3Route("FestivalApi", "/Swagger/FestivalApi/swagger.json"));
             });
-            app.UseMiddleware<JwtMiddleware>();
+            
 
 
 

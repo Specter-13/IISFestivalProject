@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FestivalProject.BL.Facade;
+using FestivalProject.BL.Helpers;
 using FestivalProject.BL.Models.InterpretDto;
 using FestivalProject.BL.Models.UserDto;
 using FestivalProject.BL.Services;
@@ -92,6 +93,17 @@ namespace FestivalProject.Controllers
                 return BadRequest(new { message = "Username or password is incorrect" });
 
             return Ok(response);
+
+        }
+
+        [Authorize]
+        [HttpGet("validate")]
+        public IActionResult ValidateToken()
+        {
+
+          
+
+            return Ok();
 
         }
     }

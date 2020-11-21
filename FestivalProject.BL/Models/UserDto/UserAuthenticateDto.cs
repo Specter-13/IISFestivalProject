@@ -6,7 +6,7 @@ using FestivalProject.DAL.Entities;
 
 namespace FestivalProject.BL.Models.UserDto
 {
-    public class UserAuthenticateDto : EntityBase
+    public class UserAuthenticateDto 
     {
         [Required]
         public string Username { get; set; }

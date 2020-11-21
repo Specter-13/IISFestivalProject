@@ -54,7 +54,7 @@ namespace FestivalProject.BL.Helpers
                 var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
                 // attach user to context on successful jwt validation
-                context.Items["User"] = facade.GetById(userId);
+                context.Items["UserDetailDto"] = facade.GetById(userId);
             }
             catch
             {

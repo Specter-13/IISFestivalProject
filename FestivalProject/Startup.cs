@@ -50,6 +50,9 @@ namespace FestivalProject
             });
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddDbContext<FestivalDbContext>(option => option.UseSqlServer(Configuration["database:connection"]));
+            //needed for azure sql server
+            //services.AddDbContext<FestivalDbContext>(option => option.UseSqlServer(Configuration["database:azure-connection"]));
+
             services.AddControllers();
 
             services.AddScoped<InterpretRepository>();
@@ -80,7 +83,10 @@ namespace FestivalProject
             // configure strongly typed settings object
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
-
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
         }
 

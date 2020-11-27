@@ -53,6 +53,15 @@ namespace FestivalProject.DAL.Seed
                     Data.Metallica.LogoUri,
                     Data.Metallica.Rating
                 });
+                entity.HasData(new
+                {
+                    Data.TomasKlus.Id,
+                    Data.TomasKlus.Name,
+                    Data.TomasKlus.Genre,
+                    Data.TomasKlus.Description,
+                    Data.TomasKlus.LogoUri,
+                    Data.TomasKlus.Rating
+                });
             });
         }
 
@@ -75,6 +84,13 @@ namespace FestivalProject.DAL.Seed
                     Data.LowStage.Capacity,
                     Data.LowStage.Name,
                     Data.LowStage.FestivalId
+                });
+                entity.HasData(new
+                {
+                    Data.MainStagePohoda.Id,
+                    Data.MainStagePohoda.Capacity,
+                    Data.MainStagePohoda.Name,
+                    Data.MainStagePohoda.FestivalId
                 });
             });
         }
@@ -146,6 +162,11 @@ namespace FestivalProject.DAL.Seed
                     Data.FestivalInterpretPohodaDurica.InterpretId,
                     Data.FestivalInterpretPohodaDurica.FestivalId
                 });
+                entity.HasData(new
+                {
+                    Data.FestivalInterpretPohodaTomasKlus.InterpretId,
+                    Data.FestivalInterpretPohodaTomasKlus.FestivalId
+                });
             });
         }
 
@@ -165,7 +186,8 @@ namespace FestivalProject.DAL.Seed
                     Data.StageInterpretDuricaMainStage.StageId,
                     Data.StageInterpretDuricaMainStage.InterpretId,
                     Data.StageInterpretDuricaMainStage.ConcertLength,
-                    Data.StageInterpretDuricaMainStage.ConcertStart
+                    Data.StageInterpretDuricaMainStage.ConcertStart,
+                    Data.StageInterpretDuricaMainStage.ConcertEnd
 
                 });
                 entity.HasData(new
@@ -173,7 +195,17 @@ namespace FestivalProject.DAL.Seed
                     Data.StageInterpretMetallicaMainStage.StageId,
                     Data.StageInterpretMetallicaMainStage.InterpretId,
                     Data.StageInterpretMetallicaMainStage.ConcertLength,
-                    Data.StageInterpretMetallicaMainStage.ConcertStart
+                    Data.StageInterpretMetallicaMainStage.ConcertStart,
+                    Data.StageInterpretDuricaMainStage.ConcertEnd
+
+                });
+                entity.HasData(new
+                {
+                    Data.StageInterpretTomasKlusMainStagePohoda.StageId,
+                    Data.StageInterpretTomasKlusMainStagePohoda.InterpretId,
+                    Data.StageInterpretTomasKlusMainStagePohoda.ConcertLength,
+                    Data.StageInterpretTomasKlusMainStagePohoda.ConcertStart,
+                    Data.StageInterpretDuricaMainStage.ConcertEnd
 
                 });
             });
@@ -212,6 +244,34 @@ namespace FestivalProject.DAL.Seed
                     Data.Viewer1.Psc,
                     Data.Viewer1.Role
                 });
+                entity.HasData(new
+                {
+                    Data.Cashier.Id,
+                    Data.Cashier.Name,
+                    Data.Cashier.Street,
+                    Data.Cashier.Country,
+                    Data.Cashier.City,
+                    Data.Cashier.Surname,
+                    Data.Cashier.Username,
+                    Data.Cashier.Password,
+                    Data.Cashier.Email,
+                    Data.Cashier.Psc,
+                    Data.Cashier.Role
+                });
+                entity.HasData(new
+                {
+                    Data.Organizer.Id,
+                    Data.Organizer.Name,
+                    Data.Organizer.Street,
+                    Data.Organizer.Country,
+                    Data.Organizer.City,
+                    Data.Organizer.Surname,
+                    Data.Organizer.Username,
+                    Data.Organizer.Password,
+                    Data.Organizer.Email,
+                    Data.Organizer.Psc,
+                    Data.Organizer.Role
+                });
             });
         }
 
@@ -232,7 +292,18 @@ namespace FestivalProject.DAL.Seed
                     Data.Viewer1Reservation.Tickets,
                     Data.Viewer1Reservation.UserId
                 });
-              
+                entity.HasData(new
+                {
+                    Data.Viewer2Reservation.Id,
+                    Data.Viewer2Reservation.FestivalId,
+                    Data.Viewer2Reservation.Name,
+                    Data.Viewer2Reservation.Price,
+                    Data.Viewer2Reservation.Description,
+                    Data.Viewer2Reservation.State,
+                    Data.Viewer2Reservation.Tickets,
+                    Data.Viewer2Reservation.UserId
+                });
+
             });
         }
 

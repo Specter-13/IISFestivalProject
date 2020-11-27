@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FestivalProject.DAL.Migrations
 {
     [DbContext(typeof(FestivalDbContext))]
-    [Migration("20201120203111_AddMoreData")]
-    partial class AddMoreData
+    [Migration("20201127001759_InitialCreateWithTestData")]
+    partial class InitialCreateWithTestData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -126,6 +126,11 @@ namespace FestivalProject.DAL.Migrations
                         {
                             InterpretId = new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"),
                             FestivalId = new Guid("30d09c0f-f6aa-442c-9d87-2869faf175f4")
+                        },
+                        new
+                        {
+                            InterpretId = new Guid("6fe7846f-3d54-4c46-9ebe-7d9558b4589e"),
+                            FestivalId = new Guid("30d09c0f-f6aa-442c-9d87-2869faf175f4")
                         });
                 });
 
@@ -169,9 +174,18 @@ namespace FestivalProject.DAL.Migrations
                             Id = new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"),
                             Description = "Without word one of the best metal groups.",
                             Genre = 2,
-                            LogoUri = "https://www.adamdurica.com/wp-content/uploads/2019/04/album_adam_durica_mandolina-400x400.jpg",
+                            LogoUri = "https://i.pinimg.com/originals/93/47/6b/93476b00366cd9998f5299a75d793f17.jpg",
                             Name = "Metallica",
                             Rating = 9.7f
+                        },
+                        new
+                        {
+                            Id = new Guid("6fe7846f-3d54-4c46-9ebe-7d9558b4589e"),
+                            Description = "One of the best czech singers.",
+                            Genre = 0,
+                            LogoUri = "https://upload.wikimedia.org/wikipedia/commons/3/3c/T_Klus_2014.JPG",
+                            Name = "Tomas Klus",
+                            Rating = 7.7f
                         });
                 });
 
@@ -259,6 +273,17 @@ namespace FestivalProject.DAL.Migrations
                             State = 0,
                             Tickets = 1,
                             UserId = new Guid("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1")
+                        },
+                        new
+                        {
+                            Id = new Guid("f1de571c-fa9e-42de-b19a-a67a66841112"),
+                            Description = "rezervacia zruzena kvoli nezaplateniu",
+                            FestivalId = new Guid("30d09c0f-f6aa-442c-9d87-2869faf175f4"),
+                            Name = "Pohoda rezervacia (mozno bude lepsie nejake cislo rezervacie)",
+                            Price = 210m,
+                            State = 2,
+                            Tickets = 3,
+                            UserId = new Guid("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1")
                         });
                 });
 
@@ -297,6 +322,13 @@ namespace FestivalProject.DAL.Migrations
                             Capacity = 200,
                             FestivalId = new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"),
                             Name = "Low Stage"
+                        },
+                        new
+                        {
+                            Id = new Guid("f9adad79-fd79-469d-8dda-53400fc572bd"),
+                            Capacity = 5000,
+                            FestivalId = new Guid("30d09c0f-f6aa-442c-9d87-2869faf175f4"),
+                            Name = "Main Stage Pohoda"
                         });
                 });
 
@@ -308,8 +340,11 @@ namespace FestivalProject.DAL.Migrations
                     b.Property<Guid>("StageId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<TimeSpan>("ConcertLength")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("ConcertEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ConcertLength")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ConcertStart")
                         .HasColumnType("datetime2");
@@ -325,15 +360,25 @@ namespace FestivalProject.DAL.Migrations
                         {
                             InterpretId = new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"),
                             StageId = new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"),
-                            ConcertLength = new TimeSpan(0, 2, 30, 0, 0),
+                            ConcertEnd = new DateTime(2020, 7, 25, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcertLength = 120,
                             ConcertStart = new DateTime(2020, 7, 25, 15, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             InterpretId = new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"),
                             StageId = new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"),
-                            ConcertLength = new TimeSpan(0, 3, 30, 0, 0),
+                            ConcertEnd = new DateTime(2020, 7, 25, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcertLength = 60,
                             ConcertStart = new DateTime(2020, 7, 26, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            InterpretId = new Guid("6fe7846f-3d54-4c46-9ebe-7d9558b4589e"),
+                            StageId = new Guid("f9adad79-fd79-469d-8dda-53400fc572bd"),
+                            ConcertEnd = new DateTime(2020, 7, 25, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcertLength = 40,
+                            ConcertStart = new DateTime(2020, 7, 26, 20, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -402,6 +447,34 @@ namespace FestivalProject.DAL.Migrations
                             Street = "Vajnorska",
                             Surname = "Bakosova",
                             Username = "trdielko"
+                        },
+                        new
+                        {
+                            Id = new Guid("54d733af-b179-418c-b7d3-ca3d3f7c96a4"),
+                            City = "Pardubice",
+                            Country = "Czech Republic",
+                            Email = "simonko@gmail.sk",
+                            Name = "Simon",
+                            Password = "pokladni",
+                            Psc = "13845",
+                            Role = 2,
+                            Street = "Orlojova",
+                            Surname = "Sedlacek",
+                            Username = "pokladni"
+                        },
+                        new
+                        {
+                            Id = new Guid("2b578e7f-adef-4511-86d6-4237cf958d80"),
+                            City = "Praha",
+                            Country = "Czech Republic",
+                            Email = "gutentag@gmail.com",
+                            Name = "Bolek",
+                            Password = "organizator",
+                            Psc = "236548",
+                            Role = 1,
+                            Street = "Letna",
+                            Surname = "Polivka",
+                            Username = "organizator"
                         });
                 });
 

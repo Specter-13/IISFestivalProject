@@ -357,7 +357,7 @@ namespace FestivalProject.Tests
                     new StageInterpretEntity
                     {
                         StageId = Guid.Parse("cb22c323-729d-49e6-834a-644d47d3dc4c"),
-                        ConcertLength = new TimeSpan(0, 3, 30, 0),
+                        ConcertLength =20,
                         ConcertStart = new DateTime(2025, 7, 15, 15, 0, 0),
 
                     },
@@ -365,7 +365,7 @@ namespace FestivalProject.Tests
                     new StageInterpretEntity
                     {
                         StageId = Guid.Parse("4afd5bb9-6c95-411b-becf-daffb873a7a4"),
-                        ConcertLength = new TimeSpan(0, 3, 30, 0),
+                        ConcertLength = 30,
                         ConcertStart = new DateTime(2025, 7, 15, 15, 0, 0),
 
                     },

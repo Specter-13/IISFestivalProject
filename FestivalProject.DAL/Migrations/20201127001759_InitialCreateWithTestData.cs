@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FestivalProject.DAL.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreateWithTestData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -166,8 +166,9 @@ namespace FestivalProject.DAL.Migrations
                 {
                     InterpretId = table.Column<Guid>(nullable: false),
                     StageId = table.Column<Guid>(nullable: false),
-                    ConcertLength = table.Column<TimeSpan>(nullable: false),
-                    ConcertStart = table.Column<DateTime>(nullable: false)
+                    ConcertLength = table.Column<int>(nullable: false),
+                    ConcertStart = table.Column<DateTime>(nullable: false),
+                    ConcertEnd = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,7 +190,11 @@ namespace FestivalProject.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Festivals",
                 columns: new[] { "Id", "Capacity", "City", "Country", "Description", "EndTime", "Genre", "LogoUri", "Name", "Price", "StartTime", "Street" },
-                values: new object[] { new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), 1500, "Piestany", "Slovakia", "One of the best festivals in Slovakia!", new DateTime(2020, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "https://www.gregi.net/wp-content/uploads/2018/07/logo-1.jpg", "Grape", 55m, new DateTime(2020, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Letiskova 123" });
+                values: new object[,]
+                {
+                    { new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), 1500, "Piestany", "Slovakia", "One of the best festivals in Slovakia!", new DateTime(2020, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "https://www.gregi.net/wp-content/uploads/2018/07/logo-1.jpg", "Grape", 55m, new DateTime(2020, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Letiskova 123" },
+                    { new Guid("30d09c0f-f6aa-442c-9d87-2869faf175f4"), 10000, "Trenčin", "Slovakia", "The best festivals in Slovakia!", new DateTime(2020, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "https://dl-media.viber.com/5/share/2/long/vibes/icon/image/0x0/105c/2c48f0221e7b0b58487a6483ba8c19e8a0a4f4d27a7e0291932b5dc92c41105c.jpg", "Pohoda", 70m, new DateTime(2020, 8, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Letisko" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Interprets",
@@ -197,7 +202,8 @@ namespace FestivalProject.DAL.Migrations
                 values: new object[,]
                 {
                     { new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"), "One of the most talented slovak singer.", 0, "https://www.adamdurica.com/wp-content/uploads/2019/04/album_adam_durica_mandolina-400x400.jpg", "Adam Durica", 8.7f },
-                    { new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"), "Without word one of the best metal groups.", 2, "https://www.adamdurica.com/wp-content/uploads/2019/04/album_adam_durica_mandolina-400x400.jpg", "Metallica", 9.7f }
+                    { new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"), "Without word one of the best metal groups.", 2, "https://i.pinimg.com/originals/93/47/6b/93476b00366cd9998f5299a75d793f17.jpg", "Metallica", 9.7f },
+                    { new Guid("6fe7846f-3d54-4c46-9ebe-7d9558b4589e"), "One of the best czech singers.", 0, "https://upload.wikimedia.org/wikipedia/commons/3/3c/T_Klus_2014.JPG", "Tomas Klus", 7.7f }
                 });
 
             migrationBuilder.InsertData(
@@ -206,7 +212,9 @@ namespace FestivalProject.DAL.Migrations
                 values: new object[,]
                 {
                     { new Guid("1ae18ad6-9809-4b19-be41-94aa4ff622f8"), null, "Slovakia", "xspavo00@vutrb.cz", "David", "123", null, 0, null, "Spavor", "admin" },
-                    { new Guid("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1"), "Bratislava", "Slovakia", "trdielko@hotmail.sk", "Barbora", "12345", "03855", 3, "Vajnorska", "Bakosova", "trdielko" }
+                    { new Guid("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1"), "Bratislava", "Slovakia", "trdielko@hotmail.sk", "Barbora", "12345", "03855", 3, "Vajnorska", "Bakosova", "trdielko" },
+                    { new Guid("54d733af-b179-418c-b7d3-ca3d3f7c96a4"), "Pardubice", "Czech Republic", "simonko@gmail.sk", "Simon", "pokladni", "13845", 2, "Orlojova", "Sedlacek", "pokladni" },
+                    { new Guid("2b578e7f-adef-4511-86d6-4237cf958d80"), "Praha", "Czech Republic", "gutentag@gmail.com", "Bolek", "organizator", "236548", 1, "Letna", "Polivka", "organizator" }
                 });
 
             migrationBuilder.InsertData(
@@ -215,7 +223,9 @@ namespace FestivalProject.DAL.Migrations
                 values: new object[,]
                 {
                     { new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"), new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e") },
-                    { new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"), new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e") }
+                    { new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"), new Guid("30d09c0f-f6aa-442c-9d87-2869faf175f4") },
+                    { new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"), new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e") },
+                    { new Guid("6fe7846f-3d54-4c46-9ebe-7d9558b4589e"), new Guid("30d09c0f-f6aa-442c-9d87-2869faf175f4") }
                 });
 
             migrationBuilder.InsertData(
@@ -230,7 +240,11 @@ namespace FestivalProject.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Reservations",
                 columns: new[] { "Id", "Description", "FestivalId", "Name", "Price", "State", "Tickets", "UserId" },
-                values: new object[] { new Guid("8edf6ecd-8d1d-4fbf-92c1-9640e4bc21d9"), "rezervacia sa vybavuje", new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), "Grape rezervacia (mozno bude lepsie nejake cislo rezervacie)", 55m, 0, 1, new Guid("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1") });
+                values: new object[,]
+                {
+                    { new Guid("8edf6ecd-8d1d-4fbf-92c1-9640e4bc21d9"), "rezervacia sa vybavuje", new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), "Grape rezervacia (mozno bude lepsie nejake cislo rezervacie)", 55m, 0, 1, new Guid("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1") },
+                    { new Guid("f1de571c-fa9e-42de-b19a-a67a66841112"), "rezervacia zruzena kvoli nezaplateniu", new Guid("30d09c0f-f6aa-442c-9d87-2869faf175f4"), "Pohoda rezervacia (mozno bude lepsie nejake cislo rezervacie)", 210m, 2, 3, new Guid("e3681bb8-1e7f-4e4f-8abe-58dbd211d6d1") }
+                });
 
             migrationBuilder.InsertData(
                 table: "Stages",
@@ -238,18 +252,24 @@ namespace FestivalProject.DAL.Migrations
                 values: new object[,]
                 {
                     { new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), 600, new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), "Main Stage" },
-                    { new Guid("4afd5bb9-6c95-411b-becf-daffb873a7a4"), 200, new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), "Low Stage" }
+                    { new Guid("4afd5bb9-6c95-411b-becf-daffb873a7a4"), 200, new Guid("46abef51-c53f-4cc5-a270-a2756ef1455e"), "Low Stage" },
+                    { new Guid("f9adad79-fd79-469d-8dda-53400fc572bd"), 5000, new Guid("30d09c0f-f6aa-442c-9d87-2869faf175f4"), "Main Stage Pohoda" }
                 });
 
             migrationBuilder.InsertData(
                 table: "StageInterprets",
-                columns: new[] { "InterpretId", "StageId", "ConcertLength", "ConcertStart" },
-                values: new object[] { new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"), new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), new TimeSpan(0, 2, 30, 0, 0), new DateTime(2020, 7, 25, 15, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "InterpretId", "StageId", "ConcertEnd", "ConcertLength", "ConcertStart" },
+                values: new object[] { new Guid("0c41b222-d06b-4021-9668-a4f845bbe57b"), new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), new DateTime(2020, 7, 25, 17, 0, 0, 0, DateTimeKind.Unspecified), 120, new DateTime(2020, 7, 25, 15, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "StageInterprets",
-                columns: new[] { "InterpretId", "StageId", "ConcertLength", "ConcertStart" },
-                values: new object[] { new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"), new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), new TimeSpan(0, 3, 30, 0, 0), new DateTime(2020, 7, 26, 10, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "InterpretId", "StageId", "ConcertEnd", "ConcertLength", "ConcertStart" },
+                values: new object[] { new Guid("c993e8d3-719b-43d7-908b-e26dc6f4ace0"), new Guid("cb22c323-729d-49e6-834a-644d47d3dc4c"), new DateTime(2020, 7, 25, 17, 0, 0, 0, DateTimeKind.Unspecified), 60, new DateTime(2020, 7, 26, 10, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "StageInterprets",
+                columns: new[] { "InterpretId", "StageId", "ConcertEnd", "ConcertLength", "ConcertStart" },
+                values: new object[] { new Guid("6fe7846f-3d54-4c46-9ebe-7d9558b4589e"), new Guid("f9adad79-fd79-469d-8dda-53400fc572bd"), new DateTime(2020, 7, 25, 17, 0, 0, 0, DateTimeKind.Unspecified), 40, new DateTime(2020, 7, 26, 20, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FestivalInterprets_FestivalId",

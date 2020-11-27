@@ -11,7 +11,8 @@ namespace FestivalProject.DAL.Entities
         public Guid StageId { get; set; }
         public StageEntity Stage { get; set; }
 
-        public TimeSpan ConcertLength { get; set; }
+        public int ConcertLength { get; set; }
         public DateTime ConcertStart { get; set; }
+        public DateTime ConcertEnd { get; set; }
     }
 }

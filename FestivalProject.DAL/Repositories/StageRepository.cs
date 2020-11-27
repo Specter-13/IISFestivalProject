@@ -24,6 +24,7 @@ namespace FestivalProject.DAL.Repositories
         public StageEntity GetById(Guid id)
         {
             return _dbContext.Stages.Include(x => x.StageInterpret)
+                    .ThenInclude(x => x.Interpret)
                 .Include(x => x.Festival)
                 .First(x => x.Id == id);
         }

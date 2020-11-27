@@ -10,7 +10,8 @@ namespace FestivalProject.BL.Models.StageInterpretDto
         public StageForFestivalDto Stage { get; set; }
         public Guid StageId { get; set; }
 
-        public TimeSpan ConcertLength { get; set; }
+        public int ConcertLength { get; set; }
         public DateTime ConcertStart { get; set; }
+        public DateTime ConcertEnd { get; set; }
     }
 }

@@ -33,6 +33,12 @@
     <Compile Remove="Migrations\20201111003302_InitialCreate.Designer.cs" />
     <Compile Remove="Migrations\20201111170222_RemovedLoginId.cs" />
     <Compile Remove="Migrations\20201111170222_RemovedLoginId.Designer.cs" />
+    <Compile Remove="Migrations\20201111182147_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201111182147_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201120203111_AddMoreData.cs" />
+    <Compile Remove="Migrations\20201120203111_AddMoreData.Designer.cs" />
+    <Compile Remove="Migrations\20201127001534_InitialCreateWithTestData.cs" />
+    <Compile Remove="Migrations\20201127001534_InitialCreateWithTestData.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

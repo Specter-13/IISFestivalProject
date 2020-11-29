@@ -23,19 +23,19 @@ namespace FestivalProject.BL.Facade
             return _mapper.Map<IList<ReservationListDto>>(_repo.GetAll());
         }
 
-        public ReservationDetailDto GetById(Guid id)
+        public ReservationCreateUpdate GetById(Guid id)
         {
-            return _mapper.Map<ReservationDetailDto>(_repo.GetById(id));
+            return _mapper.Map<ReservationCreateUpdate>(_repo.GetById(id));
         }
 
-        public ReservationDetailDto Create(ReservationDetailDto item)
+        public ReservationCreateUpdate Create(ReservationCreateUpdate item)
         {
-            return _mapper.Map<ReservationDetailDto>(_repo.Create(_mapper.Map<ReservationEntity>(item)));
+            return _mapper.Map<ReservationCreateUpdate>(_repo.Create(_mapper.Map<ReservationEntity>(item)));
         }
 
-        public ReservationDetailDto Update(ReservationDetailDto item)
+        public ReservationCreateUpdate Update(ReservationCreateUpdate item)
         {
-            return _mapper.Map<ReservationDetailDto>(_repo.Update(_mapper.Map<ReservationEntity>(item)));
+            return _mapper.Map<ReservationCreateUpdate>(_repo.Update(_mapper.Map<ReservationEntity>(item)));
         }
 
         public void Delete(Guid id)

@@ -240,7 +240,6 @@ namespace FestivalProject.DAL.Seed
         {
             Id = Guid.Parse("8edf6ecd-8d1d-4fbf-92c1-9640e4bc21d9"),
             State = ReservationStatus.InProgress,
-            Name = "Grape rezervacia (mozno bude lepsie nejake cislo rezervacie)",
             Tickets = 1,
             Price = 55,
             Description = "rezervacia sa vybavuje",
@@ -252,7 +251,6 @@ namespace FestivalProject.DAL.Seed
         {
             Id = Guid.Parse("f1de571c-fa9e-42de-b19a-a67a66841112"),
             State = ReservationStatus.Declined,
-            Name = "Pohoda rezervacia (mozno bude lepsie nejake cislo rezervacie)",
             Tickets = 3,
             Price = 210,
             Description = "rezervacia zruzena kvoli nezaplateniu",

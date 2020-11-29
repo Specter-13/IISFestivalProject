@@ -13,10 +13,13 @@ namespace FestivalProject.BL.Mapper
         public ReservationProfiles()
         {
             CreateMap<ReservationListDto, ReservationEntity>();
-            CreateMap<ReservationDetailDto, ReservationEntity>();
+            CreateMap<ReservationCreateUpdate, ReservationEntity>();
 
-            CreateMap<ReservationEntity, ReservationListDto > ().ForMember(d=> d.FestivalName, o=>o.MapFrom(s=>s.Festival.Name));
-            CreateMap<ReservationEntity,ReservationDetailDto > ();
+            CreateMap<ReservationEntity, ReservationListDto>()
+                .ForMember(d => d.FestivalName, o => o.MapFrom(s => s.Festival.Name))
+                .ForMember(d => d.Username, o => o.MapFrom(s => s.User.Username));
+           
+            CreateMap<ReservationEntity,ReservationCreateUpdate > ();
         }
     }
 }

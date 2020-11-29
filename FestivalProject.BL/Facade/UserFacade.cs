@@ -32,6 +32,10 @@ namespace FestivalProject.BL.Facade
         {
             return _mapper.Map<UserDetailDto>(_repo.GetByUsername(username));
         }
+        public UserAuthenticateDto GetUserPassword(Guid id)
+        {
+            return _mapper.Map<UserAuthenticateDto>(_repo.GetById(id));
+        }
 
         public UserCreateEditDto Create(UserCreateEditDto item)
         {

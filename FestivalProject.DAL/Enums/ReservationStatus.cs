@@ -8,6 +8,7 @@ namespace FestivalProject.DAL.Enums
     {
         InProgress,
         Accepted,
-        Declined
+        Declined,
+        Refused
     }
 }

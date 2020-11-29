@@ -9,6 +9,7 @@ using FestivalProject.BL.Models.UserDto;
 using FestivalProject.BL.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace FestivalProject.Controllers
 {
@@ -32,6 +33,8 @@ namespace FestivalProject.Controllers
             return Ok(_facade.GetAll());
 
         }
+
+        
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
@@ -95,13 +98,26 @@ namespace FestivalProject.Controllers
             return Ok(response);
 
         }
+        
+        [HttpGet("password/{id}")]
+        public IActionResult GetPassword(Guid id)
+        {
+            try
+            {
+
+                return Ok(_facade.GetUserPassword(id));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
 
         [Authorize]
         [HttpGet("validate")]
         public IActionResult ValidateToken()
         {
-
-          
 
             return Ok();
 

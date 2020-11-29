@@ -42,7 +42,7 @@ namespace FestivalProject.Controllers
 
 
         [HttpPost]
-        public IActionResult Create([FromBody] ReservationDetailDto item)
+        public IActionResult Create([FromBody] ReservationCreateUpdate item)
         {
             var returnedItem = _facade.Create(item);
             if (returnedItem == null)
@@ -54,7 +54,7 @@ namespace FestivalProject.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] ReservationDetailDto item)
+        public IActionResult Update([FromBody] ReservationCreateUpdate item)
         {
             try
             {

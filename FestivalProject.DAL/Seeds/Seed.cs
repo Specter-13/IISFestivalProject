@@ -285,7 +285,6 @@ namespace FestivalProject.DAL.Seed
                 {
                     Data.Viewer1Reservation.Id,
                     Data.Viewer1Reservation.FestivalId,
-                    Data.Viewer1Reservation.Name,
                     Data.Viewer1Reservation.Price,
                     Data.Viewer1Reservation.Description,
                     Data.Viewer1Reservation.State,
@@ -296,7 +295,6 @@ namespace FestivalProject.DAL.Seed
                 {
                     Data.Viewer2Reservation.Id,
                     Data.Viewer2Reservation.FestivalId,
-                    Data.Viewer2Reservation.Name,
                     Data.Viewer2Reservation.Price,
                     Data.Viewer2Reservation.Description,
                     Data.Viewer2Reservation.State,

@@ -9,7 +9,6 @@ namespace FestivalProject.DAL.Entities
     public class ReservationEntity : EntityBase
     {
         public ReservationStatus State { get; set; }
-        public string Name { get; set; }
         public int Tickets { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }

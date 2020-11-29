@@ -129,7 +129,6 @@ namespace FestivalProject.Tests
             {
                 Id = Guid.Parse("8edf6ecd-8d1d-4fbf-92c1-9640e4bc21d9"),
                 State = ReservationStatus.InProgress,
-                Name = "Grape rezervacia (mozno bude lepsie nejake cislo rezervacie)",
                 Tickets = 1,
                 Price = 55,
                 Description = "rezervacia sa vybavuje",

@@ -4,6 +4,7 @@ using System.Text;
 using FestivalProject.BL.Models.ReservationDto;
 using FestivalProject.DAL.Entities;
 using FestivalProject.DAL.Enums;
+using Newtonsoft.Json;
 
 namespace FestivalProject.BL.Models.UserDto
 {

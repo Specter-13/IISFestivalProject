@@ -32,6 +32,21 @@ namespace FestivalProject.DAL.Repositories
                 .First(x => x.Id == id);
         }
 
+        public int GetTicketsCountByFestivalId(Guid id)
+        {
+            var listOfReservations =_dbContext.Reservations.Where(x => x.FestivalId == id).ToList();
+            var allTickets = 0;
+
+            foreach (var item in listOfReservations)
+            {
+                allTickets += item.Tickets;
+            }
+                
+            return allTickets;
+
+        }
+
+
         public ReservationEntity Create(ReservationEntity item)
         {
             _dbContext.Reservations.Add(item);

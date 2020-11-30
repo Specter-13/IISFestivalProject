@@ -28,6 +28,11 @@ namespace FestivalProject.BL.Facade
             return _mapper.Map<ReservationCreateUpdate>(_repo.GetById(id));
         }
 
+        public int GetTicketsCountByFestivalId(Guid FestivalId)
+        {
+            return _repo.GetTicketsCountByFestivalId(FestivalId);
+        }
+
         public ReservationCreateUpdate Create(ReservationCreateUpdate item)
         {
             return _mapper.Map<ReservationCreateUpdate>(_repo.Create(_mapper.Map<ReservationEntity>(item)));

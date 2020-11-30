@@ -61,13 +61,17 @@ namespace FestivalProject
             services.AddScoped<UserRepository>();
             services.AddScoped<StageRepository>();
             services.AddScoped<ReservationRepository>();
+            services.AddScoped<FestivalInterpretRepository>();
+            services.AddScoped<StageInterpretRepository>();
 
             services.AddScoped<InterpretFacade>();
             services.AddScoped<FestivalFacade>();
             services.AddScoped<UserFacade>();
             services.AddScoped<ReservationFacade>();
             services.AddScoped<StageFacade>();
-            
+            services.AddScoped<FestivalInterpretFacade>();
+            services.AddScoped<StageInterpretFacade>();
+
 
             services.AddAutoMapper(typeof(InterpretProfiles), typeof(MemberProfiles), 
                 typeof(FestivalProfiles), typeof(FestivalInterpretProfiles),

@@ -182,12 +182,12 @@ namespace FestivalProject.DAL.Seed
             Name = "David",
             Surname = "Spavor",
             Country = "Slovakia",
-            City = null,
-            Street = null,
-            Psc = null,
+            City = "Dolny Kubin",
+            Street = "Hviezdoslavovo",
+            Psc = "1234",
             Email = "xspavo00@vutrb.cz",
             Username = "admin",
-            Password = "123"
+            Password = "admin"
         };
 
         public static readonly UserEntity Viewer1 = new UserEntity
@@ -201,8 +201,8 @@ namespace FestivalProject.DAL.Seed
             Street = "Vajnorska",
             Psc = "03855",
             Email = "trdielko@hotmail.sk",
-            Username = "trdielko",
-            Password = "12345"
+            Username = "barborka",
+            Password = "barborka"
         };
 
         public static readonly UserEntity Cashier = new UserEntity
@@ -210,7 +210,7 @@ namespace FestivalProject.DAL.Seed
             Id = Guid.Parse("54d733af-b179-418c-b7d3-ca3d3f7c96a4"),
             Role = UserRoles.Cashier,
             Name = "Simon",
-            Surname = "Sedlacek",
+            Surname = "MIchalek",
             Country = "Czech Republic",
             City = "Pardubice",
             Street = "Orlojova",

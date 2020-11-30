@@ -15,10 +15,12 @@ namespace FestivalProject.Controllers
     public class FestivalController : Controller
     {
         private readonly FestivalFacade _facade;
+        private readonly ReservationFacade _reservationFacade;
 
-        public FestivalController(FestivalFacade facade)
+        public FestivalController(FestivalFacade facade, ReservationFacade reservationFacade)
         {
             _facade = facade;
+            _reservationFacade = reservationFacade;
         }
 
         [HttpGet]
@@ -36,10 +38,28 @@ namespace FestivalProject.Controllers
             if (returnedItem == null) return NotFound();
             return Ok(_facade.GetById(id));
             
+        }
+
+        [HttpGet("tickets/{id}")]
+        public IActionResult GetTicketsCountByFestivalId(Guid id)
+        {
+            try
+            {
+                var count = _reservationFacade.GetTicketsCountByFestivalId(id);
+
+
+                return Ok(new FestivalReservationCountDto
+                {
+                    ReservedTickets = count
+                });
+            }
+            catch 
+            {
+                return NotFound();
+            }
 
 
         }
-
 
         [HttpPost]
         public IActionResult Create([FromBody] FestivalDetailDto item)
@@ -56,14 +76,11 @@ namespace FestivalProject.Controllers
         [HttpPut]
         public IActionResult Update([FromBody] FestivalDetailDto item)
         {
-            try
-            {
+            
                 return Ok(_facade.Update(item));
-            }
-            catch
-            {
-                return BadRequest();
-            }
+           
+                //return BadRequest();
+            
 
         }
         [HttpDelete("{id}")]

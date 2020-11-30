@@ -17,6 +17,10 @@ namespace FestivalProject.BL.Mapper
 
             CreateMap<FestivalInterpretForInterpretDto,FestivalInterpretEntity>();
             CreateMap<FestivalInterpretForFestivalDto,FestivalInterpretEntity>();
+
+
+            CreateMap<FestivalInterpretCreateUpdate, FestivalInterpretEntity>();
+            CreateMap<FestivalInterpretEntity, FestivalInterpretCreateUpdate>();
         }
     }
 }

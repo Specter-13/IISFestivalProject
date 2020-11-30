@@ -19,6 +19,9 @@ namespace FestivalProject.BL.Mapper
 
             CreateMap<StageInterpretEntity, StageInterpretBaseDto>();
             CreateMap<StageInterpretBaseDto, StageInterpretEntity>();
+
+            CreateMap<StageInterpretEntity, StageInterpretCreateUpdateDto>();
+            CreateMap<StageInterpretCreateUpdateDto, StageInterpretEntity>();
         }
     }
 }

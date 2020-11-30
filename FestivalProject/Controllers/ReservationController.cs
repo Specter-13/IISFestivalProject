@@ -37,9 +37,7 @@ namespace FestivalProject.Controllers
             return Ok(returnedItem);
 
 
-
         }
-
 
         [HttpPost]
         public IActionResult Create([FromBody] ReservationCreateUpdate item)

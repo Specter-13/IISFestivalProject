@@ -18,7 +18,7 @@ namespace FestivalProject.DAL.Repositories
         }
         public IList<ReservationEntity> GetAll()
         {
-            return _dbContext.Reservations
+            return _dbContext.Reservations.AsNoTracking()
                 .Include(x => x.Festival)
                 .Include(x => x.User)
                 .ToList();
@@ -26,15 +26,15 @@ namespace FestivalProject.DAL.Repositories
 
         public ReservationEntity GetById(Guid id)
         {
-            return _dbContext.Reservations
+            return _dbContext.Reservations.AsNoTracking()
                 .Include(x => x.Festival)
                 .Include(x => x.User)
-                .First(x => x.Id == id);
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public int GetTicketsCountByFestivalId(Guid id)
         {
-            var listOfReservations =_dbContext.Reservations.Where(x => x.FestivalId == id).ToList();
+            var listOfReservations =_dbContext.Reservations.AsNoTracking().Where(x => x.FestivalId == id).ToList();
             var allTickets = 0;
 
             foreach (var item in listOfReservations)
@@ -63,7 +63,7 @@ namespace FestivalProject.DAL.Repositories
 
         public void Delete(Guid id)
         {
-            var entity = _dbContext.Reservations.First(t => t.Id == id);
+            var entity = _dbContext.Reservations.AsNoTracking().First(t => t.Id == id);
             _dbContext.Remove(entity);
             _dbContext.SaveChanges();
         }

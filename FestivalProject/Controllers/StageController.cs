@@ -40,7 +40,7 @@ namespace FestivalProject.Controllers
 
 
         [HttpPost]
-        public IActionResult Create([FromBody] StageDetailDto item)
+        public IActionResult Create([FromBody] StageCreateDto item)
         {
             var returnedItem = _facade.Create(item);
             if (returnedItem == null)

@@ -13,7 +13,9 @@ namespace FestivalProject.BL.Mapper
     {
         public StageProfiles()
         {
-            
+
+            CreateMap<StageEntity, StageCreateDto>();
+            CreateMap<StageCreateDto, StageEntity>();
             CreateMap<StageEntity, StageDetailDto>();
             CreateMap<StageDetailDto,StageEntity>();
 

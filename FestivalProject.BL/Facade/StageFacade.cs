@@ -29,9 +29,9 @@ namespace FestivalProject.BL.Facade
             return _mapper.Map<StageDetailDto>(_repo.GetById(id));
         }
 
-        public StageDetailDto Create(StageDetailDto item)
+        public StageCreateDto Create(StageCreateDto item)
         {
-            return _mapper.Map<StageDetailDto>(_repo.Create(_mapper.Map<StageEntity>(item)));
+            return _mapper.Map<StageCreateDto>(_repo.Create(_mapper.Map<StageEntity>(item)));
         }
 
         public StageDetailDto Update(StageDetailDto item)

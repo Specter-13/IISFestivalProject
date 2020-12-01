@@ -51,5 +51,20 @@ namespace FestivalProject.Controllers
             }
 
         }
+
+        [HttpDelete("{stageId}/{interpretId}")]
+        public IActionResult Delete( Guid stageId, Guid interpretId)
+        {
+            try
+            {
+                _facade.Delete(stageId,interpretId);
+                return Ok();
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+        }
     }
 }

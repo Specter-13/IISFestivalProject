@@ -29,5 +29,10 @@ namespace FestivalProject.BL.Facade
             return _mapper.Map<StageInterpretCreateUpdateDto>(_repo.Update(_mapper.Map<StageInterpretEntity>(item)));
         }
 
+        public void Delete(Guid StageId, Guid InterpretId)
+        {
+            _repo.Delete(StageId, InterpretId);
+        }
+
     }
 }
